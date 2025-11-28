@@ -5,9 +5,10 @@ export default async function handler(request, response) {
   await dbConnect();
 
   if (request.method === "GET") {
-    const activities = await Activity.find();
-    return response.status(200).json(activities);
+    const activities = await Activity.find().populate("categories");
+    response.status(200).json(activities);
+    return;
   }
 
-  response.status(405).json({ message: "Method not allowed" });
+  response.status(405).json({ status: "Method not allowed" });
 }

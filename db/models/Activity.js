@@ -1,13 +1,15 @@
 import mongoose from "mongoose";
+import "./Category";
 
 const { Schema } = mongoose;
+
 const activitySchema = new Schema({
-  title: String,
-  categories: String,
-  area: String,
-  country: String,
-  description: String,
-  imagenUrl: String,
+  title: { type: String, required: true, minlength: 3 },
+  imageUrl: { type: String, required: true, default: "/placeholder.png" },
+  categories: { type: [Schema.Types.ObjectId], ref: "Category" },
+  description: { type: String },
+  area: { type: String },
+  country: { type: String },
 });
 
 const Activity =
