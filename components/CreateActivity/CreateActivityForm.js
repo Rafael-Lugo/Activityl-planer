@@ -32,8 +32,7 @@ export default function ActivityForm() {
 
     //activity to go on top and successmessage
     setSuccessMessage("Activity has been created!");
-    const newActivity = await response.json();
-    mutate((olderActivities) => [newActivity, ...olderActivities]);
+    mutate();
     event.target.reset();
   }
 
@@ -44,7 +43,6 @@ export default function ActivityForm() {
     <>
       <h1>Create your Activity</h1>
       <form onSubmit={handleSubmit}>
-        <h2>Create your Activity</h2>
         <label htmlFor="title">
           Title:*
           <input type="text" id="title" name="title" required />
@@ -54,7 +52,7 @@ export default function ActivityForm() {
           <input type="text" id="description" name="description" />
         </label>
         <label htmlFor="category">
-          Please select a category*
+          Please select a cata egory*
           <select id="category" name="category" required>
             <option value="Select Category">Please select a category</option>
             {categories?.map((category) => (

@@ -9,12 +9,6 @@ export default async function handler(request, response) {
     response.status(200).json(categories);
     return;
   }
-  if (request.method === "POST") {
-    const categoryData = request.body;
-    await Category.create(categoryData);
-    response.status(201).json({ status: "Category created." });
-    return;
-  }
 
   response.status(405).json({ status: "Method not allowed" });
 }
