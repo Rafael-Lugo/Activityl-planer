@@ -52,7 +52,7 @@ export default function ActivityForm() {
           <input type="text" id="description" name="description" />
         </label>
         <label htmlFor="category">
-          Please select a cata egory*
+          Please select a category*
           <select id="category" name="category" required>
             <option value="Select Category">Please select a category</option>
             {categories?.map((category) => (
