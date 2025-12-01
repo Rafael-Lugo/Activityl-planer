@@ -1,21 +1,17 @@
 import { useState } from "react";
+import Image from "next/image";
 
 export default function FavoriteButton({
-  isFavorite,
-  onClick,
+  liked,
+  _id,
   toogleFavorite,
 }) {
-  const [liked, setLiked] = useState(false);
-
-  function toogleFavorite() {
-    setLiked(!liked);
-  }
 
   return (
     <>
-      <Button type="button" onClick={toogleFavorite}>
-        {liked ? "remove like" : "Add like"}
-      </Button>
+      <button type="button" onClick={toogleFavorite} _id={liked} aria-label={liked ? "unlike" : "like"}>
+        <Image src="/assets/flag.svg" width={40} height={40} alt=""/>
+      </button>
     </>
   );
 }
