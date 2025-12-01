@@ -7,6 +7,7 @@ export default function ActivityForm() {
   const { data: categories } = useSWR("/api/categories");
   const [submitError, setSubmitError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -50,12 +51,12 @@ export default function ActivityForm() {
         </label>
         <label htmlFor="description">
           Description:
-          <input type="text" id="description" name="description" required />
+          <input type="text" id="description" name="description" />
         </label>
         <label htmlFor="category">
-          Please select a category
+          Please select a category*
           <select id="category" name="category" required>
-            <option value="">Please select a category</option>
+            <option value="Select Category">Please select a category</option>
             {categories?.map((category) => (
               <option key={category._id} value={category.name}>
                 {category.name}
@@ -70,9 +71,9 @@ export default function ActivityForm() {
         <label htmlFor="country">
           Country:
           <select id="country" name="country">
-            {countryList.map((name) => (
-              <option key={name} value={name}>
-                {name}
+            {countryList.map((country) => (
+              <option key={country} value={country}>
+                {country}
               </option>
             ))}
           </select>
