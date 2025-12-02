@@ -7,24 +7,24 @@ export default function DetailsPage({}) {
   const router = useRouter();
   const { id } = router.query;
 
-  
-
-  const { data: activity, isLoading } = useSWR(`/api/activities/${id}`);
+  const { data: activity, isLoading, error } = useSWR(`/api/activities/${id}`);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
 
   if (!activity) {
-    return;
+    return (
+      <div>
+        <h1>Not Found</h1>
+        <p>Activity not found.</p>
+      </div>
+    );
   }
 
   return (
     <>
   <ActivityDetails activity={activity}/>
-     
-   
     </>
-
   );
 }

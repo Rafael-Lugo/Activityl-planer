@@ -5,10 +5,8 @@ export default function BackButton (){
 
 
     return(
-        <>
         <Link href="/">
         <StyledBackButton>Back</StyledBackButton>
         </Link>
-        </>
     )
 }
