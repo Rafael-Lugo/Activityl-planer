@@ -1,14 +1,16 @@
 import { Bookmark } from "lucide-react";
 import Image from "next/image";
 
-export default function FavoriteButton({ liked, _id, toggleFavorite }) {
+export default function FavoriteButton({ _id, toggleFavorite, liked }) {
+  const likedActivity = liked.includes(_id);
+
   return (
     <button
       type="button"
       onClick={() => toggleFavorite(_id)} //arrow function on _id
-      aria-label={liked ? "unlike" : "like"}
+      aria-label={likedActivity ? "unlike" : "like"}
     >
-      <Bookmark fill={liked ? "red" : "none"}/>
+      <Bookmark fill={likedActivity ? "red" : "none"} />
     </button>
   );
 }

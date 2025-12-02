@@ -1,4 +1,4 @@
-import ActivityList from "@/components/ActivityList";
+import ActivityList from "../Activitylist/ActivityList";
 import useSWR from "swr";
 
 export default function FavoriteListPage({ liked, toogleFavorite }) {

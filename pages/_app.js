@@ -4,7 +4,6 @@ import { useState } from "react";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
-
 export default function App({ Component, pageProps }) {
   const [liked, setLiked] = useState([]);
 
@@ -20,7 +19,11 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <SWRConfig value={{ fetcher }}>
-        <Component {...pageProps} toggleFavorite={toggleFavorite} liked={liked}/>
+        <Component
+          {...pageProps}
+          toggleFavorite={toggleFavorite}
+          liked={liked}
+        />
       </SWRConfig>
     </>
   );

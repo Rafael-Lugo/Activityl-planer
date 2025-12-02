@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import ActivityCard from "./ActivityCard";
+import FavoriteButton from "../FavoriteButton";
 
 export default function ActivityList({ liked, toggleFavorite }) {
   const { data, isLoading, error } = useSWR("/api/activities");
@@ -13,12 +14,19 @@ export default function ActivityList({ liked, toggleFavorite }) {
       <h3>Activities:</h3>
       <ul>
         {data.map((activity) => (
-          <ActivityCard
-            liked={liked}
-            toggleFavorite={toggleFavorite}
-            key={activity._id}
-            {...activity}
-          />
+          <>
+            <ActivityCard
+              liked={liked}
+              toggleFavorite={toggleFavorite}
+              key={activity._id}
+              {...activity}
+            />
+            <FavoriteButton
+              liked={liked}
+              _id={activity._id}
+              toggleFavorite={toggleFavorite}
+            />
+          </>
         ))}
       </ul>
     </>
