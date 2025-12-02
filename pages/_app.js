@@ -1,7 +1,6 @@
 import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
 import { useState } from "react";
-import { SWRConfig } from "swr";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
@@ -9,7 +8,7 @@ const fetcher = (url) => fetch(url).then((response) => response.json());
 export default function App({ Component, pageProps }) {
   const [liked, setLiked] = useState([]);
 
-  function toogleFavorite(_id) {
+  function toggleFavorite(_id) {
     setLiked((liked) =>
       liked.includes(_id)
         ? liked.filter((activity) => activity !== _id)
@@ -21,7 +20,7 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <SWRConfig value={{ fetcher }}>
-        <Component {...pageProps} toogleFavorite={toogleFavorite} liked={liked}/>
+        <Component {...pageProps} toggleFavorite={toggleFavorite} liked={liked}/>
       </SWRConfig>
     </>
   );
