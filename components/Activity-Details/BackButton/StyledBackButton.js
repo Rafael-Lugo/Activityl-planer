@@ -1,3 +1,5 @@
 import styled from "styled-components";
 
-export const StyledBackButton = ``;
+export const StyledBackButton = styled.button`
+background-color: beige;
+`;

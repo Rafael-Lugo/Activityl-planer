@@ -1,23 +1,17 @@
 import BackButton from "./BackButton/BackButton";
-import Link from "next/link";
-import Image from "next/image";
+
 
 export default function ActivityDetails({ activity }) {
-  if (!activity) {
-    return <p>Activity is not found</p>;
-  }
-
+  
   return (
     <>
     <header>
       <h1>{activity.title}</h1>
       </header>
       <main>
-      <Link href="/">
         <BackButton />
-      </Link>
-      <Image
-        src={activity.imageUrl}
+      <img
+        src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&h=300&fit=crop&crop=center"
         alt={activity.title}
         height={300}
         width={300}
