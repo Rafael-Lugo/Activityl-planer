@@ -9,6 +9,12 @@ export default async function handler(request, response) {
     response.status(200).json(activities);
     return;
   }
+  if (request.method === "POST") {
+    const activityData = request.body;
+    await Activity.create(activityData);
+    response.status(201).json({ status: "Activity created." });
+    return;
+  }
 
   response.status(405).json({ status: "Method not allowed" });
 }
