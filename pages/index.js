@@ -1,14 +1,16 @@
+import ActivityCard from "@/components/Activitylist/ActivityCard";
+import ActivityList from "@/components/Activitylist/ActivityList";
 import Link from "next/link";
 
-//dynamischer Link kann nach der pull request erstellt werden
 
 export default function HomePage() {
   return (
-    <div>
-      <h1>Hello from Next.js</h1>
-      <Link href="/activities/Surfing">Go to Surfing Activity</Link>
-    </div>
+    <>
+      <h1>Activity Planer</h1>
+      <h2>for your next journey</h2>
+      <ActivityList />
+      <ActivityCard />
+       <Link href="/activities/Surfing">Go to Surfing Activity</Link>
+    </>
   );
 }
-
-
