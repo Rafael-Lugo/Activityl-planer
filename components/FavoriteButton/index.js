@@ -1,3 +1,4 @@
+import { Bookmark } from "lucide-react";
 import Image from "next/image";
 
 export default function FavoriteButton({ liked, _id, toogleFavorite }) {
@@ -7,7 +8,7 @@ export default function FavoriteButton({ liked, _id, toogleFavorite }) {
       onClick={() => toogleFavorite(_id)} //arrow function on _id
       aria-label={liked ? "unlike" : "like"}
     >
-      <Image src="assets/flag.svg" width={40} height={40} alt="" />
+      <Bookmark fill={liked ? "red" : "none"}/>
     </button>
   );
 }

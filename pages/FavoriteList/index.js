@@ -1,10 +1,8 @@
 import ActivityList from "@";
 import useSWR from "swr";
 
-const fetcher = (url) => fetch(url).then((response) => response.json());
-
 export default function FavoriteListPage({ liked, toogleFavorite }) {
-  const { data: activities } = useSWR("/api/activities", fetcher);
+  const { data: activities } = useSWR("/api/activities");
 
   if (!activities) return <p>No activities found</p>;
 
