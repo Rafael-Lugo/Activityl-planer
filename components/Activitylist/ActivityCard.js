@@ -4,8 +4,12 @@ export default function ActivityCard({ title, area, country, description }) {
   return (
     <>
       <li>
-        <section>{title}</section>
-        <article>{description}</article>
+        <article>
+          <h3>{title}</h3>
+        </article>
+        <article>
+          <p>{description}</p>
+        </article>
         <ul>
           <li>{area}</li>
           <li>{country}</li>
