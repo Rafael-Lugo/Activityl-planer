@@ -10,7 +10,6 @@ export default function HomePage() {
       <h2>for your next journey</h2>
       <ActivityList />
       <ActivityCard />
-       <Link href="/activities/Surfing">Go to Surfing Activity</Link>
     </>
   );
 }
