@@ -6,7 +6,7 @@ export default function HomePage() {
     <>
       <h1>Activity Planer</h1>
       <h2>for your next journey</h2>
-      <ActivityList />
+      <ActivityList liked={liked} toogleFavorite={toogleFavorite} />
       <ActivityCard />
     </>
   );
