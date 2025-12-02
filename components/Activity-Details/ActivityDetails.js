@@ -9,7 +9,10 @@ export default function ActivityDetails({ activity }) {
 
   return (
     <>
+    <header>
       <h1>{activity.title}</h1>
+      </header>
+      <main>
       <Link href="/">
         <BackButton />
       </Link>
@@ -23,13 +26,14 @@ export default function ActivityDetails({ activity }) {
       <p>Area: {activity.area}</p>
       <p>Country: {activity.country}</p>
       {activity.categories && activity.categories.length > 0 && (
-        <div>
+        <section>
           <strong>Categories:</strong>
           {activity.categories.map((category) => (
             <span key={category._id}> {category.name}</span>
           ))}
-        </div>
+        </section>
       )}
+      </main>
     </>
   );
 }
