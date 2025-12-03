@@ -1,15 +1,17 @@
 import BackButton from "./BackButton/BackButton";
+import DeleteButton from "./DeleteButton/DeleteButton";
 
 
-export default function ActivityDetails({ activity }) {
+export default function ActivityDetails({ activity, onDelete }) {
   
   return (
     <>
     <header>
       <h1>{activity.title}</h1>
+         <BackButton />
       </header>
       <main>
-        <BackButton />
+        <DeleteButton id={activity._id} onDelete={onDelete}/>
       <img
         src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&h=300&fit=crop&crop=center"
         alt={activity.title}
