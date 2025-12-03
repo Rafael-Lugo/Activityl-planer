@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
-import styled from "styled-components";
 import ActivityDetails from "@/components/Activity-Details/ActivityDetails";
 
 export default function DetailsPage({}) {
@@ -21,10 +20,19 @@ export default function DetailsPage({}) {
       </div>
     );
   }
+ async function handleDelete() {
+    const response = await fetch(`/api/activities/${id}`, {
+      method: "DELETE",
+    });
+
+       if (response.ok) {
+        router.push("/");
+       } else {return alert("Please try again")}
+      }
 
   return (
     <>
-  <ActivityDetails activity={activity}/>
+  <ActivityDetails activity={activity} onDelete={handleDelete}/>
     </>
   );
 }

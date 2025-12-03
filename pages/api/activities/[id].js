@@ -5,6 +5,12 @@ export default async function handlerDetails(request, response) {
   await dbConnect();
   const { id } = request.query;
 
+
+if(request.method === "DELETE"){
+      await Activity.findByIdAndDelete(id);
+      response.status(200).json({status: `Activity ${id} succsessfully deleted.`})
+    }
+
   if (request.method === "GET") {
       const activity = await Activity.findById(id).populate("categories");
 
@@ -17,5 +23,7 @@ export default async function handlerDetails(request, response) {
       return;
     }
       response.status(405).json({ message: "Method not allowed" });
+    
+    
     }
   
