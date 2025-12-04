@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BackButton from "./BackButton/BackButton";
+import EditButton from "../EditButton/EditButton";
 
 export default function ActivityDetails({ activity }) {
   const [editForm, setEditForm] = useState(false);
@@ -24,6 +25,12 @@ export default function ActivityDetails({ activity }) {
     <>
       <header>
         <h1>{activity.title}</h1>
+        <EditButton
+          onClick={() => {
+            setEditForm("title");
+            setUpdatedValue(activity.title);
+          }}
+        />
       </header>
       <main>
         <BackButton />
