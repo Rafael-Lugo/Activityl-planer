@@ -81,7 +81,6 @@ export default function ActivityForm() {
         {submitError && <p>{submitError}</p>}
         {successMessage && <p>{successMessage}</p>}
       </form>
-      <Navigation/>
     </>
   );
 }

@@ -17,9 +17,6 @@ export default function ActivityList() {
           <ActivityCard key={activity._id} {...activity} />
         ))}
       </ul>
-       <footer>
-        <Navigation/>
-      </footer>
     </>
   );
 }
