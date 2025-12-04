@@ -1,13 +1,13 @@
 import ActivityCard from "@/components/Activitylist/ActivityCard";
 import ActivityList from "@/components/Activitylist/ActivityList";
 
-export default function HomePage({ liked, toggleFavorite }) {
+export default function HomePage({ liked, toggleLiked }) {
   return (
     <>
       <h1>Activity Planer</h1>
       <h2>for your next journey</h2>
-      <ActivityList liked={liked} toggleFavorite={toggleFavorite} />
-      <ActivityCard liked={liked} toggleFavorite={toggleFavorite} />
+      <ActivityList liked={liked} toggleLiked={toggleLiked} />
+      <ActivityCard liked={liked} toggleLiked={toggleLiked} />
     </>
   );
 }

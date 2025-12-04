@@ -5,13 +5,11 @@ export default function ActivityCard({
   title,
   area,
   country,
-  description,
-  toggleFavorite,
-  liked,
+  description
 }) {
   return (
     <li>
-      {/* <FavoriteButton liked={liked} toggleFavorite={toggleFavorite}/> */}
+      
       <h3>{title}</h3>
       <p>{description}</p>
       <ul>

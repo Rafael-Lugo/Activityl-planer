@@ -1,28 +1,36 @@
-import ActivityList from "../Activitylist/ActivityList";
+import ActivityCard from "../Activitylist/ActivityCard";
 import useSWR from "swr";
 
-export default function FavoriteListPage({ liked, toogleFavorite }) {
-  const { data: activities } = useSWR("/api/activities");
+export default function FavoriteListPage({ liked, toggleLiked }) {
+  const { data: activities, isLoading, error } = useSWR("/api/activities");
 
   if (!activities) return <p>No activities found</p>;
+  if (isLoading) return <p>Loading activities...</p>;
+  if (error) return <p>Error loading activities</p>;
 
   // Filter für nur favorite activities
   const favoriteActivities = activities.filter((activity) =>
     liked.includes(activity._id)
   );
 
+  if (favoriteActivities.length === 0){
+    return <p>No activities yet.</p>;
+  }
+
   return (
-    <>
-      <h1>Favorite Activities</h1>
-      {favoriteActivities.length === 0 ? (
-        <p>You have no favorite activities yet.</p>
-      ) : (
-        <ActivityList
-          activities={favoriteActivities}
-          liked={liked}
-          toogleFavorite={toogleFavorite}
-        />
-      )}
-    </>
+    <ul>
+      {favoriteActivities.map((activity) => (
+        <li key={activity._id}>
+          <ActivityCard
+            title={activity.title}
+            description={activity.description}
+            area={activity.area}
+            country={activity.country}
+            toggleLiked={toggleLiked}
+            liked={liked}
+          />
+        </li>
+      ))}
+    </ul>
   );
 }

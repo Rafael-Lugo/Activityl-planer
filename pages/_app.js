@@ -7,7 +7,7 @@ const fetcher = (url) => fetch(url).then((response) => response.json());
 export default function App({ Component, pageProps }) {
   const [liked, setLiked] = useState([]);
 
-  function toggleFavorite(_id) {
+  function toggleLiked(_id) {
     setLiked((liked) =>
       liked.includes(_id)
         ? liked.filter((activity) => activity !== _id)
@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }) {
       <SWRConfig value={{ fetcher }}>
         <Component
           {...pageProps}
-          toggleFavorite={toggleFavorite}
+          toggleLiked={toggleLiked}
           liked={liked}
         />
       </SWRConfig>
