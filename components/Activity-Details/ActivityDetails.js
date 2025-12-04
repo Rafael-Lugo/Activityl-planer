@@ -44,7 +44,7 @@ export default function ActivityDetails({ activity }) {
       <main>
         <BackButton />
         <img
-          src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&h=300&fit=crop&crop=center"
+          src={activity.imageUrl}
           alt={activity.title}
           height={300}
           width={300}
