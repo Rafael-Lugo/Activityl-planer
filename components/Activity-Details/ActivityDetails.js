@@ -1,6 +1,5 @@
 import { useState } from "react";
 import BackButton from "./BackButton/BackButton";
-import EditButton from "../EditButton/EditButton";
 import countries from "world-countries";
 import useSWR from "swr";
 
@@ -9,6 +8,28 @@ export default function ActivityDetails({ activity }) {
   const { mutate } = useSWR(`/api/activities/${activity._id}`);
 
   const countryList = countries.map((country) => country.name.common);
+  function EditableItem({ form, display }) {
+    const [toggleEdit, setToggleEdit] = useState(false);
+    return (
+      <div>
+        {toggleEdit ? (
+          <div
+            onSubmit={() => {
+              setToggleEdit(false);
+            }}
+          >
+            {form}
+          </div>
+        ) : (
+          display
+        )}
+
+        <button onClick={() => setToggleEdit(!toggleEdit)}>
+          {toggleEdit ? "Cancel" : "Edit"}
+        </button>
+      </div>
+    );
+  }
 
   async function handleEdit(event) {
     event.preventDefault();
@@ -110,28 +131,5 @@ export default function ActivityDetails({ activity }) {
         />
       </main>
     </>
-  );
-}
-
-function EditableItem({ form, display }) {
-  const [toggleEdit, setToggleEdit] = useState(false);
-  return (
-    <div>
-      {toggleEdit ? (
-        <div
-          onSubmit={() => {
-            setToggleEdit(false);
-          }}
-        >
-          {form}
-        </div>
-      ) : (
-        display
-      )}
-
-      <EditButton onClick={() => setToggleEdit(!toggleEdit)}>
-        {toggleEdit ? "Cancel" : "Edit"}
-      </EditButton>
-    </div>
   );
 }
