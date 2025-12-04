@@ -1,5 +1,6 @@
 import ActivityCard from "@/components/Activitylist/ActivityCard";
 import ActivityList from "@/components/Activitylist/ActivityList";
+import Navigation from "@/components/Navigation/Navigation";
 import Link from "next/link";
 
 
