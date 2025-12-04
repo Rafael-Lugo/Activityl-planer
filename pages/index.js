@@ -1,7 +1,5 @@
 import ActivityCard from "@/components/Activitylist/ActivityCard";
 import ActivityList from "@/components/Activitylist/ActivityList";
-import Link from "next/link";
-
 
 export default function HomePage() {
   return (
