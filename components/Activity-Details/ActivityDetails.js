@@ -8,28 +8,6 @@ export default function ActivityDetails({ activity }) {
   const { mutate } = useSWR(`/api/activities/${activity._id}`);
 
   const countryList = countries.map((country) => country.name.common);
-  function EditableItem({ form, display }) {
-    const [toggleEdit, setToggleEdit] = useState(false);
-    return (
-      <div>
-        {toggleEdit ? (
-          <div
-            onSubmit={() => {
-              setToggleEdit(false);
-            }}
-          >
-            {form}
-          </div>
-        ) : (
-          display
-        )}
-
-        <button onClick={() => setToggleEdit(!toggleEdit)}>
-          {toggleEdit ? "Cancel" : "Edit"}
-        </button>
-      </div>
-    );
-  }
 
   async function handleEdit(event) {
     event.preventDefault();
@@ -53,7 +31,10 @@ export default function ActivityDetails({ activity }) {
         <EditableItem
           form={
             <form onSubmit={handleEdit}>
-              <input name="title" defaultValue={activity.title} />
+              <label>
+                <strong>Title: </strong>
+                <input name="title" defaultValue={activity.title} />
+              </label>
               <button type="submit">Save</button>
             </form>
           }
@@ -71,26 +52,42 @@ export default function ActivityDetails({ activity }) {
         <EditableItem
           form={
             <form onSubmit={handleEdit}>
-              <input name="description" defaultValue={activity.description} />
+              <label>
+                <strong>Description: </strong>
+                <input name="description" defaultValue={activity.description} />
+              </label>
               <button type="submit">Save</button>
             </form>
           }
-          display={<p>{activity.description}</p>}
+          display={
+            <p>
+              <strong>Description: </strong> {activity.description}
+            </p>
+          }
         />
 
         <EditableItem
           form={
             <form onSubmit={handleEdit}>
-              <input name="area" defaultValue={activity.area} />
+              <label>
+                <strong>Area:</strong>
+                <input name="area" defaultValue={activity.area} />
+              </label>
               <button type="submit">Save</button>
             </form>
           }
-          display={<p>Area: {activity.area}</p>}
+          display={
+            <p>
+              <strong>Area: </strong>
+              {activity.area}
+            </p>
+          }
         />
 
         <EditableItem
           form={
             <form onSubmit={handleEdit}>
+              <strong>Country: </strong>
               <select name="country" defaultValue={activity.country}>
                 {countryList.map((country) => (
                   <option key={country} value={country}>
@@ -101,13 +98,17 @@ export default function ActivityDetails({ activity }) {
               <button type="submit">Save</button>
             </form>
           }
-          display={<p>Country: {activity.country}</p>}
+          display={
+            <p>
+              <strong>Country:</strong> {activity.country}
+            </p>
+          }
         />
 
         <EditableItem
           display={
             <section>
-              <strong>Categories:</strong>
+              <strong>Category:</strong>
               {activity.categories.map((category) => (
                 <span key={category._id}> {category.name}</span>
               ))}
@@ -115,6 +116,7 @@ export default function ActivityDetails({ activity }) {
           }
           form={
             <form onSubmit={handleEdit}>
+              <strong>Category: </strong>
               <select
                 name="categories"
                 defaultValue={activity.categories[0]._id}
@@ -131,5 +133,28 @@ export default function ActivityDetails({ activity }) {
         />
       </main>
     </>
+  );
+}
+
+function EditableItem({ form, display }) {
+  const [toggleEdit, setToggleEdit] = useState(false);
+  return (
+    <div>
+      {toggleEdit ? (
+        <div
+          onSubmit={() => {
+            setToggleEdit(false);
+          }}
+        >
+          {form}
+        </div>
+      ) : (
+        display
+      )}
+
+      <button onClick={() => setToggleEdit(!toggleEdit)}>
+        {toggleEdit ? "Cancel" : "Edit"}
+      </button>
+    </div>
   );
 }
