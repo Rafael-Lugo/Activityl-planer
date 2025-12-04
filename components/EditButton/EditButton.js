@@ -1,6 +1,6 @@
-export default function EditButton({ handleEdit }) {
+export default function EditButton({ onClick }) {
   return (
-    <button type="button" onClick={handleEdit}>
+    <button type="button" onClick={onClick}>
       Edit
     </button>
   );
