@@ -1,7 +1,7 @@
-export default function EditButton({ onClick }) {
+export default function EditButton({ onClick, children }) {
   return (
     <button type="button" onClick={onClick}>
-      Edit
+      {children}
     </button>
   );
 }

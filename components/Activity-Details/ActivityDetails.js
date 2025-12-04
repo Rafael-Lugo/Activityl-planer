@@ -8,12 +8,6 @@ export default function ActivityDetails({ activity }) {
   const { data: categories } = useSWR("/api/categories");
   const { mutate } = useSWR(`/api/activities/${activity._id}`);
 
-  const [showEditTitle, setShowEditTitle] = useState(false);
-  const [showEditDescription, setShowEditDescription] = useState(false);
-  const [showEditArea, setShowEditArea] = useState(false);
-  const [showEditCountry, setShowEditCountry] = useState(false);
-  const [showEditCategories, setShowEditCategories] = useState(false);
-
   const countryList = countries.map((country) => country.name.common);
 
   async function handleEdit(event) {
@@ -28,11 +22,6 @@ export default function ActivityDetails({ activity }) {
       body: JSON.stringify(activityData),
     });
     if (response.ok) {
-      setShowEditTitle(false);
-      setShowEditDescription(false);
-      setShowEditArea(false);
-      setShowEditCountry(false);
-      setShowEditCategories(false);
       mutate();
     }
   }
@@ -40,14 +29,15 @@ export default function ActivityDetails({ activity }) {
   return (
     <>
       <header>
-        <h1>{activity.title}</h1>
-        <EditButton onClick={() => setShowEditTitle(!showEditTitle)} />
-        {showEditTitle && (
-          <form onSubmit={handleEdit}>
-            <input name="title" defaultValue={activity.title} />
-            <button type="submit">Save</button>
-          </form>
-        )}
+        <EditableItem
+          form={
+            <form onSubmit={handleEdit}>
+              <input name="title" defaultValue={activity.title} />
+              <button type="submit">Save</button>
+            </form>
+          }
+          display={<h1>{activity.title}</h1>}
+        />
       </header>
       <main>
         <BackButton />
@@ -57,64 +47,91 @@ export default function ActivityDetails({ activity }) {
           height={300}
           width={300}
         />
-        <p>{activity.description}</p>
-
-        <EditButton
-          onClick={() => setShowEditDescription(!showEditDescription)}
+        <EditableItem
+          form={
+            <form onSubmit={handleEdit}>
+              <input name="description" defaultValue={activity.description} />
+              <button type="submit">Save</button>
+            </form>
+          }
+          display={<p>{activity.description}</p>}
         />
-        {showEditDescription && (
-          <form onSubmit={handleEdit}>
-            <input name="description" defaultValue={activity.description} />
-            <button type="submit">Save</button>
-          </form>
-        )}
 
-        <p>Area: {activity.area}</p>
-        <EditButton onClick={() => setShowEditArea(!showEditArea)} />
-        {showEditArea && (
-          <form onSubmit={handleEdit}>
-            <input name="area" defaultValue={activity.area} />
-            <button type="submit">Save</button>
-          </form>
-        )}
-        <p>Country: {activity.country}</p>
-        <EditButton onClick={() => setShowEditCountry(!showEditCountry)} />
-        {showEditCountry && (
-          <form onSubmit={handleEdit}>
-            <select name="country" defaultValue={activity.country}>
-              {countryList.map((country) => (
-                <option key={country} value={country}>
-                  {country}
-                </option>
-              ))}
-            </select>
-            <button type="submit">Save</button>
-          </form>
-        )}
-        {activity.categories && activity.categories.length > 0 && (
-          <section>
-            <strong>Categories:</strong>
-            {activity.categories.map((category) => (
-              <span key={category._id}> {category.name}</span>
-            ))}
-          </section>
-        )}
-        <EditButton
-          onClick={() => setShowEditCategories(!showEditCategories)}
+        <EditableItem
+          form={
+            <form onSubmit={handleEdit}>
+              <input name="area" defaultValue={activity.area} />
+              <button type="submit">Save</button>
+            </form>
+          }
+          display={<p>Area: {activity.area}</p>}
         />
-        {showEditCategories && (
-          <form onSubmit={handleEdit}>
-            <select name="categories" defaultValue={activity.categories[0]._id}>
-              {categories?.map((category) => (
-                <option key={category._id} value={category._id}>
-                  {category.name}
-                </option>
+
+        <EditableItem
+          form={
+            <form onSubmit={handleEdit}>
+              <select name="country" defaultValue={activity.country}>
+                {countryList.map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+              <button type="submit">Save</button>
+            </form>
+          }
+          display={<p>Country: {activity.country}</p>}
+        />
+
+        <EditableItem
+          display={
+            <section>
+              <strong>Categories:</strong>
+              {activity.categories.map((category) => (
+                <span key={category._id}> {category.name}</span>
               ))}
-            </select>
-            <button type="submit">Save</button>
-          </form>
-        )}
+            </section>
+          }
+          form={
+            <form onSubmit={handleEdit}>
+              <select
+                name="categories"
+                defaultValue={activity.categories[0]._id}
+              >
+                {categories?.map((category) => (
+                  <option key={category._id} value={category._id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+              <button type="submit">Save</button>
+            </form>
+          }
+        />
       </main>
     </>
+  );
+}
+
+function EditableItem({ form, display }) {
+  const [toggleEdit, setToggleEdit] = useState(false);
+  return (
+    <div>
+      {toggleEdit ? (
+        <div
+          onSubmit={() => {
+            setToggleEdit(false);
+          }}
+        >
+          {form}
+        </div>
+      ) : (
+        display
+      )}
+
+      <EditButton onClick={() => setToggleEdit(!toggleEdit)}>
+        {toggleEdit ? "Cancel" : "Edit"}
+      </EditButton>
+    </div>
   );
 }
