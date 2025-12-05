@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import ActivityCard from "./ActivityCard";
+import Navigation from "../Navigation/Navigation";
 
 export default function ActivityList() {
   const { data, isLoading, error } = useSWR("/api/activities");

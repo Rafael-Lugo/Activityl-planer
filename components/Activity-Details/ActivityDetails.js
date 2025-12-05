@@ -1,7 +1,8 @@
-import { useState } from "react";
 import BackButton from "./BackButton/BackButton";
 import countries from "world-countries";
 import useSWR from "swr";
+import { useState } from "react";
+import Image from "next/image";
 
 export default function ActivityDetails({ activity }) {
   const { data: categories } = useSWR("/api/categories");
@@ -109,9 +110,13 @@ export default function ActivityDetails({ activity }) {
           display={
             <section>
               <strong>Category:</strong>
-              {activity.categories.map((category) => (
-                <span key={category._id}> {category.name}</span>
-              ))}
+              {activity.categories?.length > 0 ? (
+                activity.categories.map((category) => (
+                  <span key={category._id}> {category.name}</span>
+                ))
+              ) : (
+                <span> No category selected</span>
+              )}
             </section>
           }
           form={
@@ -119,7 +124,7 @@ export default function ActivityDetails({ activity }) {
               <strong>Category: </strong>
               <select
                 name="categories"
-                defaultValue={activity.categories[0]._id}
+                defaultValue={activity.categories?.[0]?._id || ""}
               >
                 {categories?.map((category) => (
                   <option key={category._id} value={category._id}>

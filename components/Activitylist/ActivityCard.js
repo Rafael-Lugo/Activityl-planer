@@ -1,4 +1,6 @@
 import Link from "next/link";
+import styled from "styled-components";
+import { Title } from "../Style-General";
 
 export default function ActivityCard({
   _id,
@@ -6,7 +8,7 @@ export default function ActivityCard({
   country,
   categories,
   area,
-  imageUrl
+  imageUrl,
 }) {
   return (
     <li>
