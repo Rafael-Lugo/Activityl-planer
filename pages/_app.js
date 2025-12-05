@@ -1,6 +1,7 @@
 import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
 import { useState } from "react";
+import Navigation from "@/components/Navigation/Navigation";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
@@ -19,11 +20,8 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <SWRConfig value={{ fetcher }}>
-        <Component
-          {...pageProps}
-          toggleLiked={toggleLiked}
-          liked={liked}
-        />
+        <Component {...pageProps} toggleLiked={toggleLiked} liked={liked} />
+        <Navigation />
       </SWRConfig>
     </>
   );

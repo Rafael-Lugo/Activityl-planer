@@ -2,6 +2,7 @@ import useSWR from "swr";
 import ActivityCard from "./ActivityCard";
 import FavoriteButton from "../FavoriteButton";
 
+
 export default function ActivityList({ liked, toggleLiked }) {
   const { data, isLoading, error } = useSWR("/api/activities");
 

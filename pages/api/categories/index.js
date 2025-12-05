@@ -10,5 +10,13 @@ export default async function handler(request, response) {
     return;
   }
 
-  response.status(405).json({ status: "Method not allowed" });
+  if (request.method === "POST") {
+    const productData = request.body;
+    await Category.create(productData);
+
+    response.status(201).json({ status: "Product created." });
+    return;
+  }
+
+  response.status(405).json({ status: "Method not allowed." });
 }
