@@ -1,4 +1,5 @@
 import ActivityCard from "./ActivityCard";
+import Navigation from "../Navigation/Navigation";
 
 export default function ActivityList({ activities }) {
   if (!activities) return <p>No activities found.</p>;

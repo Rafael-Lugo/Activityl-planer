@@ -3,6 +3,8 @@ import ActivityList from "@/components/Activitylist/ActivityList";
 import useSWR from "swr";
 import { useState } from "react";
 
+
+
 export default function HomePage() {
   const { data: activities, isLoading, error } = useSWR("/api/activities");
   const [search, setSearch] = useState("");
@@ -33,7 +35,7 @@ export default function HomePage() {
 
   return (
     <>
-      <h1>Activity Planer</h1>
+      <h1>Activity Planner</h1>
       <h2>for your next journey</h2>
       <input placeholder="Filter: Title, Category, Country" value={search} onChange={handleSearch} />
       <ActivityList activities={filterActivities} />
