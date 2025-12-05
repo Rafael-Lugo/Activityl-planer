@@ -6,13 +6,13 @@ import Navigation from "@/components/Navigation/Navigation";
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
 export default function App({ Component, pageProps }) {
-  const [liked, setLiked] = useState([]);
+  const [likedActivityIds, setLikedActivityIds] = useState([]);
 
   function toggleLiked(_id) {
-    setLiked((liked) =>
-      liked.includes(_id)
-        ? liked.filter((activity) => activity !== _id)
-        : [...liked, _id]
+    setLikedActivityIds((likedActivityIds) =>
+      likedActivityIds.includes(_id)
+        ? likedActivityIds.filter((activity) => activity !== _id)
+        : [...likedActivityIds, _id]
     );
   }
 
@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <SWRConfig value={{ fetcher }}>
-        <Component {...pageProps} toggleLiked={toggleLiked} liked={liked} />
+        <Component {...pageProps} toggleLiked={toggleLiked} likedActivityIds={likedActivityIds} />
         <Navigation />
       </SWRConfig>
     </>
