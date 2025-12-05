@@ -11,20 +11,21 @@ export default function FavoritesPage({ likedActivityIds, toggleLiked }) {
   // Filter für nur favorite activities
   const favoriteActivities = activities.filter((activity) =>
     likedActivityIds.includes(activity._id)
-  );
-
-  if (favoriteActivities.length === 0) {
-    return <p>No activities yet.</p>;
-  }
+  );  
 
   return (
     <>
       <h1>Favorites Activities:</h1>
+      
+       {favoriteActivities.length === 0 ? (
+        <p>No activities yet.</p>
+      ) : (
       <ActivityList
         activities={favoriteActivities}
         toggleLiked={toggleLiked}
         likedActivityIds={likedActivityIds}
       />
+      )}
     </>
   );
 }
