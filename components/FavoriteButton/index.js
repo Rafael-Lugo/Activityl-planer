@@ -2,7 +2,7 @@ import { Bookmark } from "lucide-react";
 import Image from "next/image";
 
 export default function FavoriteButton({ _id, toggleLiked, liked }) {
-  const likedActivity = liked.includes(_id);
+  const likedActivity = liked?.includes(_id);
 
   return (
     <button

@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import FavoriteButton from "../FavoriteButton";
 
-export default function ActivityCard({ _id, title, area, country, description }) {
+
+export default function ActivityCard({ _id, title, area, country, description}) {
   return (
     <li>
-      <FavoriteButton activityId={_id} />
+      
       <Link href={`/activities/${_id}`}>
        <img
               src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&h=300&fit=crop&crop=center"
