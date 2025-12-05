@@ -2,11 +2,11 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import ActivityDetails from "@/components/Activity-Details/ActivityDetails";
 
-export default function DetailsPage({}) {
+export default function DetailsPage() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data: activity, isLoading, error } = useSWR(`/api/activities/${id}`);
+  const { data: activity, isLoading } = useSWR(`/api/activities/${id}`);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
