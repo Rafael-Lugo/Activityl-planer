@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import ActivityCard from "./ActivityCard";
 import Navigation from "../Navigation/Navigation";
+import { CardTitle, StyledActivityList } from "../Style-General";
 
 export default function ActivityList() {
   const { data, isLoading, error } = useSWR("/api/activities");
@@ -11,12 +12,12 @@ export default function ActivityList() {
 
   return (
     <>
-      <h3>Activities:</h3>
-      <ul>
+      <CardTitle>Activities:</CardTitle>
+      <StyledActivityList>
         {data.map((activity) => (
           <ActivityCard key={activity._id} {...activity} />
         ))}
-      </ul>
+      </StyledActivityList>
     </>
   );
 }

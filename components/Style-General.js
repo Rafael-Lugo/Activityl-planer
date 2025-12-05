@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const PageWrapper = styled.body`
+export const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -24,18 +24,22 @@ export const Title = styled.h1`
   background: #12ad55;
   font-size: 32pt;
   color: var(--primary);
-  align-content: center;
+  align-self: center;
 `;
 
 export const Subtitle = styled.h2`
   font-size: 20pt;
+  align-self: center;
 `;
 
-export const h3 = styled.h3`
-  font-size: 18pt;
-`;
+export const CardTitle = styled.h3`
+font-size: 18pt;
+color: var(--primary);
+margin: 35px 0 0 0;
+`
 
 export const Text = styled.p`
+color: var(--secondary);
   font-size: 10pt;
   margin: 0 5rem 0 0;
 `;
@@ -46,12 +50,13 @@ export const StyledForm = styled.form`
   gap: 1rem;
 `;
 
-export const Activitylist = styled.ul`
+export const StyledActivityList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
 `;
 
@@ -65,3 +70,5 @@ export const ActivityItem = styled.li`
 export const StyledButton = styled.button`
   margin-top: 3rem;
 `;
+
+
