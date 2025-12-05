@@ -23,7 +23,7 @@ export const NavigationList = styled.ul`
 
 export const NavigationListItem = styled.li`
   margin: 0;
-  border: 2px solid 
+  border: 2px solid;
 `;
 
 export const NavigationLink = styled(Link)`
@@ -34,13 +34,12 @@ export const NavigationLink = styled(Link)`
   color: #ecf0f1;
   font-size: 0.9rem;
   font-weight: 500;
-  padding: 0.5rem 3rem ;
+  padding: 0.5rem 3rem;
   transition: all 0.3s ease;
   background-color: ${(props) => (props.$highlighted ? "#a9a9a9" : "#000")};
-  
-  &:hover {
-background-color:white;
-color:black;
-  }
 
+  &:hover {
+    background-color: white;
+    color: black;
+  }
 `;

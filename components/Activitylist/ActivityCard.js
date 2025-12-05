@@ -9,7 +9,7 @@ export default function ActivityCard({
   description,
 }) {
   return (
-    <li>
+    <>
       <Link href={`/activities/${_id}`}>
         <img
           src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&h=300&fit=crop&crop=center"
@@ -20,10 +20,8 @@ export default function ActivityCard({
         <h3>{title}</h3>
       </Link>
       <p>{description}</p>
-      <ul>
-        <li>{area}</li>
-        <li>{country}</li>
-      </ul>
-    </li>
+      <p>{area}</p>
+      <p>{country}</p>
+    </>
   );
 }

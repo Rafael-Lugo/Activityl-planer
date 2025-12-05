@@ -21,10 +21,6 @@ export default function DetailsPage() {
       </div>
     );
   }
-
-  return (
-    <>
-      <ActivityDetails activity={activity} />
-    </>
-  );
+  
+  return <ActivityDetails activity={activity} />;
 }
