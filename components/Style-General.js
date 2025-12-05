@@ -6,4 +6,3 @@ export const PageWrapper = styled.main`
   gap: 1rem;
 `;
 
-// export const Titel
