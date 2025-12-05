@@ -1,4 +1,3 @@
-
 import {
   NavigationLink,
   NavigationList,
@@ -23,6 +22,12 @@ export default function Navigation() {
         <NavigationListItem>
           <NavigationLink href="/" $highlighted={router.pathname === "/"}>
             Home
+          </NavigationLink>
+          <NavigationLink
+            href="/favorite"
+            $highlighted={router.pathname === "/favorite"}
+          >
+            Favorites
           </NavigationLink>
         </NavigationListItem>
       </NavigationList>
