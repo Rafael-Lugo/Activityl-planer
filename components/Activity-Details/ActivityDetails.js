@@ -1,7 +1,9 @@
-import { useState } from "react";
+
 import BackButton from "./BackButton/BackButton";
 import countries from "world-countries";
 import useSWR from "swr";
+import { useState } from "react";
+import Image from "next/image";
 
 export default function ActivityDetails({ activity }) {
   const { data: categories } = useSWR("/api/categories");

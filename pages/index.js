@@ -1,6 +1,8 @@
 import ActivityCard from "@/components/Activitylist/ActivityCard";
 import ActivityList from "@/components/Activitylist/ActivityList";
 
+
+
 export default function HomePage() {
   return (
     <>
