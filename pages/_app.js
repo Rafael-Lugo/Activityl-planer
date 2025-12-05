@@ -9,9 +9,8 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <SWRConfig value={{ fetcher }}>
-        <Component {...pageProps}/>
-          <Navigation/>
-          
+        <Component {...pageProps} />
+        <Navigation />
       </SWRConfig>
     </>
   );
