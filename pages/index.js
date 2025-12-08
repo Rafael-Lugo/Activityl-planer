@@ -1,5 +1,5 @@
 import ActivityList from "@/components/Activitylist/ActivityList";
-import { CardList } from "@/components/Style-General";
+import { CardList, Subtitle } from "@/components/Style-General";
 import useSWR from "swr";
 
 export default function HomePage({ likedActivityIds, toggleLiked }) {
@@ -11,10 +11,13 @@ export default function HomePage({ likedActivityIds, toggleLiked }) {
 
   return (
     <>
-      <h1>Activity Planner</h1>
-      <h2>for your next journey</h2>
+      <Subtitle>for your next journey</Subtitle>
       <CardList>
-        <ActivityList activities={activities} likedActivityIds={likedActivityIds} toggleLiked={toggleLiked} />
+        <ActivityList
+          activities={activities}
+          likedActivityIds={likedActivityIds}
+          toggleLiked={toggleLiked}
+        />
       </CardList>
     </>
   );

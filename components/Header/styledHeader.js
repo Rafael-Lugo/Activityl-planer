@@ -11,7 +11,7 @@ export const HeaderWrapper = styled.header`
   align-items: center;
   justify-content: center;
 
-  background: var(--background);
+  background: var(--background-secondary);
   color: var(--primary);
   border-bottom: 1px solid var(--primary-foreground);
   z-index: 1000;

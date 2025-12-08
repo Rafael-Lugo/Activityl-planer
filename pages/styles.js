@@ -12,7 +12,8 @@ export default createGlobalStyle`
   --radius: 0.5rem;   
   --background:  #343607;
   --background-foreground: #929252ff;
-  --background-secondary: #626235;
+  --background-secondary: #202114;
+  --background-tertiary: #626235;
   --card-foreground: #ffffff;
   --primary: #c6c667;
   --secondary:  #625235;
@@ -40,11 +41,10 @@ body {
   flex-wrap: wrap;
   font-family: system-ui;
   justify-content: center;
-  background: var(--background)
+  background: var(--background);
   padding-top: 80px;
 
 }
-
 `;
 
 export const CardBookmarkWrapper = styled.div`

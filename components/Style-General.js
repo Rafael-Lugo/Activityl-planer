@@ -32,6 +32,7 @@ export const Title = styled.h1`
 export const Subtitle = styled.h2`
   font-size: 20pt;
   align-self: center;
+  color: var(--secondary);
 `;
 
 export const CardDescription = styled.h3`
