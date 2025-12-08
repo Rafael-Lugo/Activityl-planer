@@ -7,6 +7,8 @@ import {
   CardBookmarkWrapper,
   CardMeta,
   CategoryList,
+  CategoryItem,
+  CardMetaItem
 } from "../Style-General";
 
 export default function ActivityCard({
@@ -44,14 +46,14 @@ export default function ActivityCard({
       </Card>
 
       <CardMeta>
-        <li>{area}</li>
-        <li>{country}</li>
+        <CardMetaItem>{area}</CardMetaItem>
+        <CardMetaItem>{country}</CardMetaItem>
       </CardMeta>
 
       {categories && (
         <CategoryList>
           {categories.map((category) => (
-            <li key={category._id}>{category.name}</li>
+            <CategoryItem key={category._id}>{category.name}</CategoryItem>
           ))}
         </CategoryList>
       )}

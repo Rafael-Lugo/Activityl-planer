@@ -142,8 +142,12 @@ export const CardMeta = styled.ul`
   display: flex;
   justify-content: space-between;
   list-style: none;
+`;
+
+export const CardMetaItem = styled.li`
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--primary);
-  font-size: 10pt;
 `;
 
 export const CategoryList = styled.ul`
@@ -154,6 +158,9 @@ export const CategoryList = styled.ul`
   display: flex;
   gap: 1rem;
   list-style: none;
+`;
+
+export const CategoryItem = styled.li`
   font-size: 0.85rem;
   color: var(--primary);
 `;
