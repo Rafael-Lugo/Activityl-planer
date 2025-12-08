@@ -5,6 +5,8 @@ import {
   CardImage,
   CardTitle,
   CardBookmarkWrapper,
+  CardMeta,
+  CategoryList,
 } from "../Style-General";
 
 export default function ActivityCard({
@@ -22,15 +24,16 @@ export default function ActivityCard({
   console.log("ActivityCard imageUrl:", imageUrl);
 
   return (
-    <li>
+    <>
       <Card>
         <Link href={`/activities/${_id}`} legacyBehavior>
           <a>
             <CardImage src={imageUrl} alt={title} height={300} width={300} />
-            
+
             <CardTitle>{title}</CardTitle>
           </a>
         </Link>
+
         <CardBookmarkWrapper>
           <FavoriteButton
             _id={_id}
@@ -38,16 +41,20 @@ export default function ActivityCard({
             isLiked={isLiked}
           />
         </CardBookmarkWrapper>
-        
-        <ul>
-          <li>{area}</li>
-          <li>{country}</li>
-        </ul>
-        {categories &&
-          categories.map((category) => (
-            <p key={category._id}>{category.name}</p>
-          ))}
       </Card>
-    </li>
+
+      <CardMeta>
+        <li>{area}</li>
+        <li>{country}</li>
+      </CardMeta>
+
+      {categories && (
+        <CategoryList>
+          {categories.map((category) => (
+            <li key={category._id}>{category.name}</li>
+          ))}
+        </CategoryList>
+      )}
+    </>
   );
 }

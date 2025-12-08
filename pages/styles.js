@@ -15,6 +15,7 @@ export default createGlobalStyle`
   --background-secondary: #202114;
   --background-tertiary: #626235;
   --card-foreground: #ffffff;
+  --card: #202114
   --primary: #c6c667;
   --secondary:  #625235;
   --terciary: #676c70ff;   
@@ -23,7 +24,7 @@ export default createGlobalStyle`
   --accent-foreground:  #faf4b0;
 }
 
-.dark {
+/* .dark {
 --radius: 0.65rem;   
   --background:  #ffffff;
   --card: none;
@@ -33,7 +34,7 @@ export default createGlobalStyle`
   --secondary-foreground:  oklch(0.205 0 0);
   --accent:  #12ad55;   
   --accent-foreground:  #000000;
-}
+} */
 
 body {
    display: flex;
@@ -47,16 +48,5 @@ body {
 }
 `;
 
-export const CardBookmarkWrapper = styled.div`
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+
 

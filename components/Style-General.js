@@ -30,8 +30,10 @@ export const Title = styled.h1`
 `;
 
 export const Subtitle = styled.h2`
-  font-size: 20pt;
-  align-self: center;
+  font-size: 18pt;
+  text-align: center;
+  padding: 0;
+  margin: 0;
   color: var(--secondary);
 `;
 
@@ -77,15 +79,18 @@ export const StyledButton = styled.button`
 //Card Layout
 
 export const Card = styled.article`
+  width: 100%;
+  max-width: 340px;
   border-radius: var(--radius);
   box-shadow: var(--card);
   /* padding: 1rem; */
-  margin: 1rem 0;
+  margin: 0 auto;
+  padding: 0;
   overflow: hidden;
   position: relative;
   /* color: var() (--card-foreground); */
-  aspect-ratio: 1/1;
-  /* display: block; */
+  aspect-ratio: 1 / 1;
+  display: block;
 `;
 
 export const CardImage = styled.img`
@@ -93,7 +98,6 @@ export const CardImage = styled.img`
   height: 100%;
   object-fit: cover;
   display: block;
-
 `;
 
 export const CardTitle = styled.h2`
@@ -103,7 +107,7 @@ export const CardTitle = styled.h2`
   margin: 0;
   font-size: 30pt;
   font-weight: bold;
-  color: var(--primary);
+  color: var(--card-foreground);
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 `;
 
@@ -111,15 +115,15 @@ export const CardList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 2rem 1.5rem;
+  padding: 2rem 1.5rem 6rem;
   margin: 0;
   list-style: none;
 `;
 
 export const CardBookmarkWrapper = styled.div`
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 1rem;
+  right: 1rem;
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -130,6 +134,29 @@ export const CardBookmarkWrapper = styled.div`
   z-index: 2;
 `;
 
+export const CardMeta = styled.ul`
+  width: 100%;
+  max-width: 340px;
+  margin: 0.75rem auto 0;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  color: var(--primary);
+  font-size: 10pt;
+`;
+
+export const CategoryList = styled.ul`
+  width: 100%;
+  max-width: 340px;
+  margin: 0.5rem auto 0;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--primary);
+`;
 
 //Icon Button Favorite
 
