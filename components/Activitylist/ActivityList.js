@@ -1,17 +1,27 @@
 import ActivityCard from "./ActivityCard";
-import Navigation from "../Navigation/Navigation";
 
-export default function ActivityList({ activities }) {
-  if (!activities) return <p>No activities found.</p>;
+
+
+export default function ActivityList({ activities, likedActivityIds, toggleLiked, }) {
+
 
   return (
-    <>
-      <h3>Activities:</h3>
-      <ul>
-        {activities.map((activity) => (
-          <ActivityCard key={activity._id} {...activity} />
-        ))}
-      </ul>
-    </>
+    <ul>
+      {activities.map((activity) => (
+        <li key={activity._id}>
+          <ActivityCard
+            _id={activity._id}
+            title={activity.title}
+            description={activity.description}
+            area={activity.area}
+            country={activity.country}
+            likedActivityIds={likedActivityIds}
+            toggleLiked={toggleLiked}
+          />
+        </li>
+      ))}
+    </ul>
   );
 }
+
+

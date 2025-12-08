@@ -23,6 +23,12 @@ export default function Navigation() {
           <NavigationLink href="/" $highlighted={router.pathname === "/"}>
             Home
           </NavigationLink>
+          <NavigationLink
+            href="/favorite"
+            $highlighted={router.pathname === "/favorite"}
+          >
+            Favorites
+          </NavigationLink>
         </NavigationListItem>
       </NavigationList>
     </NavigationWrapper>
