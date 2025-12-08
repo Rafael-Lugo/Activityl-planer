@@ -19,11 +19,10 @@ export const NavigationList = styled.ul`
   padding: 1rem;
   list-style: none;
   gap: 2rem;
-   
 `;
 
 export const NavigationListItem = styled.li`
-  margin: 0;  
+  margin: 0;
 `;
 
 export const NavigationLink = styled(Link)`
@@ -35,13 +34,13 @@ export const NavigationLink = styled(Link)`
   color: var(--primary);
   font-size: 0.9rem;
   font-weight: 500;
-  padding: 0.5rem 3rem ;
+  padding: 0.5rem 3rem;
   transition: all 0.3s ease;
-  background-color: ${(props) => (props.$highlighted ? "var(--background-foreground)" : "var(--background)")};
-  
-  &:hover {
-background-color: var(--accent);
-color: var(--accent-foreground);
-  }
+  background-color: ${(props) =>
+    props.$highlighted ? "var(--background-foreground)" : "var(--background)"};
 
+  &:hover {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
 `;
