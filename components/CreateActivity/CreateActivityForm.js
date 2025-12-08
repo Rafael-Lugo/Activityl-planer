@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import useSWR from "swr";
 import countries from "world-countries";
+import ImageUpload from "../UploadImage/ImageUpload";
 
 
 export default function ActivityForm() {
@@ -8,8 +9,10 @@ export default function ActivityForm() {
   const { data: categories } = useSWR("/api/categories");
   const [submitError, setSubmitError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   async function handleSubmit(event) {
+    
     event.preventDefault();
 
     //reset error and success messages
@@ -18,6 +21,29 @@ export default function ActivityForm() {
 
     const formData = new FormData(event.target);
     const activityData = Object.fromEntries(formData);
+
+ let imageUrl = null;
+
+  if (selectedFile) {
+    const uploadForm = new FormData();
+    uploadForm.append("cover", selectedFile);
+
+    const uploadResponse = await fetch("/api/upload", {
+      method: "POST",
+      body: uploadForm,
+    });
+
+    if (!uploadResponse.ok) {
+      setSubmitError("Image upload failed");
+      return;
+    }
+
+    const uploadResult = await uploadResponse.json();
+    imageUrl = uploadResult.url;
+  }
+
+    activityData.image = imageUrl;
+
     const response = await fetch("/api/activities", {
       method: "POST",
       headers: {
@@ -35,6 +61,7 @@ export default function ActivityForm() {
     setSuccessMessage("Activity has been created!");
     mutate();
     event.target.reset();
+    setSelectedFile(null);
   }
 
   // world countries library
@@ -44,6 +71,8 @@ export default function ActivityForm() {
     <>
       <h1>Create your Activity</h1>
       <form onSubmit={handleSubmit}>
+        <label placeholder="Enter picture">Bild</label>
+        <ImageUpload onFileSelect={(file) => setSelectedFile(file)}/>
         <label htmlFor="title">
           Title:*
           <input type="text" id="title" name="title" required />
