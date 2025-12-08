@@ -1,27 +1,53 @@
 import Link from "next/link";
-import styled from "styled-components";
-import { Title } from "../Style-General";
+import FavoriteButton from "../FavoriteButton";
+import {
+  Card,
+  CardImage,
+  CardTitle,
+  CardBookmarkWrapper,
+} from "../Style-General";
 
 export default function ActivityCard({
   _id,
   title,
+  area,
   country,
   categories,
-  area,
+  toggleLiked,
+  likedActivityIds,
   imageUrl,
 }) {
+  const isLiked = likedActivityIds?.includes(_id);
+
+  console.log("ActivityCard imageUrl:", imageUrl);
+
   return (
     <li>
-      <Link href={`/activities/${_id}`}>
-        <img src={imageUrl} alt={title} height={300} width={300} />
-      </Link>
-      <h3>{title}</h3>
-      <ul>
-        <li>{area}</li>
-        <li>{country}</li>
-      </ul>
-      {categories &&
-        categories.map((category) => <p key={category._id}>{category.name}</p>)}
+      <Card>
+        <Link href={`/activities/${_id}`} legacyBehavior>
+          <a>
+            <CardImage src={imageUrl} alt={title} height={300} width={300} />
+            
+            <CardTitle>{title}</CardTitle>
+          </a>
+        </Link>
+        <CardBookmarkWrapper>
+          <FavoriteButton
+            _id={_id}
+            toggleLiked={toggleLiked}
+            isLiked={isLiked}
+          />
+        </CardBookmarkWrapper>
+        
+        <ul>
+          <li>{area}</li>
+          <li>{country}</li>
+        </ul>
+        {categories &&
+          categories.map((category) => (
+            <p key={category._id}>{category.name}</p>
+          ))}
+      </Card>
     </li>
   );
 }

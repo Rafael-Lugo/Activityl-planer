@@ -1,23 +1,27 @@
-import useSWR from "swr";
 import ActivityCard from "./ActivityCard";
-import Navigation from "../Navigation/Navigation";
-import { CardTitle, StyledActivityList } from "../Style-General";
+import { CardList, ActivityItem } from "../Style-General";
 
-export default function ActivityList() {
-  const { data, isLoading, error } = useSWR("/api/activities");
-
-  if (isLoading) return <p>Loading...</p>;
-
-  if (error) return <p>Error to load the Page.</p>;
-
+export default function ActivityList({
+  activities,
+  likedActivityIds,
+  toggleLiked,
+}) {
   return (
-    <>
-      <CardTitle>Activities:</CardTitle>
-      <StyledActivityList>
-        {data.map((activity) => (
-          <ActivityCard key={activity._id} {...activity} />
-        ))}
-      </StyledActivityList>
-    </>
+    <CardList>
+      {activities.map((activity) => (
+        <ActivityItem key={activity._id}>
+          <ActivityCard
+            _id={activity._id}
+            imageUrl={activity.imageUrl}
+            title={activity.title}
+            description={activity.description}
+            area={activity.area}
+            country={activity.country}
+            likedActivityIds={likedActivityIds}
+            toggleLiked={toggleLiked}
+          />
+        </ActivityItem>
+      ))}
+    </CardList>
   );
 }
