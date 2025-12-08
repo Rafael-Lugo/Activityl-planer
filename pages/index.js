@@ -1,15 +1,18 @@
-import ActivityCard from "@/components/Activitylist/ActivityCard";
 import ActivityList from "@/components/Activitylist/ActivityList";
+import useSWR from "swr";
 
+export default function HomePage({ likedActivityIds, toggleLiked }) {
+  const { data: activities, isLoading, error } = useSWR("/api/activities");
 
+  if (isLoading) return <p>Loading activities…</p>;
+  if (error) return <p>Error loading activities.</p>;
+  if (!activities) return <p>No activities found.</p>;
 
-export default function HomePage() {
   return (
     <>
       <h1>Activity Planner</h1>
       <h2>for your next journey</h2>
-      <ActivityList />
-      <ActivityCard />
+      <ActivityList activities={activities} likedActivityIds={likedActivityIds} toggleLiked={toggleLiked} />
     </>
   );
 }
