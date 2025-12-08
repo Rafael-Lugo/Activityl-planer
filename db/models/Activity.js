@@ -5,7 +5,11 @@ const { Schema } = mongoose;
 
 const activitySchema = new Schema({
   title: { type: String, required: true, minlength: 3 },
-  imageUrl: { type: String, required: true, default: "/placeholder.png" },
+  imageUrl: {
+    width: { type: String, required: true },
+    height: { type: String, required: true },
+    url: { type: String, required: true },
+  },
   categories: { type: [Schema.Types.ObjectId], ref: "Category" },
   description: { type: String },
   area: { type: String },
