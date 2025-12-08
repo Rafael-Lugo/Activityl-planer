@@ -8,6 +8,7 @@ export const PageWrapper = styled.div`
   font-family: system-ui;
   justify-content: center;
   background: var(--background);
+  padding-top: 80px;
 `;
 
 export const StyledMain = styled.main`

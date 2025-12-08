@@ -41,6 +41,7 @@ body {
   font-family: system-ui;
   justify-content: center;
   background: var(--background)
+  padding-top: 80px;
 
 }
 
