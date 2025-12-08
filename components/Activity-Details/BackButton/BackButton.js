@@ -1,12 +1,5 @@
-import Link from "next/link"
-import { StyledBackButton } from "./StyledBackButton"
+import Link from "next/link";
 
-export default function BackButton (){
-
-
-    return(
-        <Link href="/">
-        <StyledBackButton>Back</StyledBackButton>
-        </Link>
-    )
+export default function BackButton() {
+  return <Link href="/">Back</Link>;
 }

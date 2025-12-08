@@ -1,18 +1,42 @@
 import ActivityList from "@/components/Activitylist/ActivityList";
 import useSWR from "swr";
+import { useState } from "react";
+import Searchbar from "@/components/Searchbar/Searchbar";
 
 export default function HomePage({ likedActivityIds, toggleLiked }) {
   const { data: activities, isLoading, error } = useSWR("/api/activities");
+  const [search, setSearch] = useState("");
 
   if (isLoading) return <p>Loading activities…</p>;
   if (error) return <p>Error loading activities.</p>;
   if (!activities) return <p>No activities found.</p>;
 
+  const filterActivities = activities
+    ? activities.filter((activity) => {
+        const match = search.toLowerCase();
+
+        const title = activity.title?.toLowerCase() || "";
+        const category = activity.category?.toLowerCase() || "";
+        const country = activity.country?.toLowerCase() || "";
+
+        return `${title}|${category}|${country}`.includes(match);
+      })
+    : [];
+
+  console.log("Activities:", activities);
+  console.log("FilterActivities:", filterActivities);
+  console.log("Search:", search);
+
   return (
     <>
       <h1>Activity Planner</h1>
       <h2>for your next journey</h2>
-      <ActivityList activities={activities} likedActivityIds={likedActivityIds} toggleLiked={toggleLiked} />
+      <Searchbar search={search} setSearch={setSearch} />
+      <ActivityList
+        activities={(activities, filterActivities)}
+        likedActivityIds={likedActivityIds}
+        toggleLiked={toggleLiked}
+      />
     </>
   );
 }

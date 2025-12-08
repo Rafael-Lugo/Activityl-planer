@@ -26,10 +26,8 @@ export default function ActivityCard({
         <h3>{title}</h3>
       </Link>
       <p>{description}</p>
-      <ul>
-        <li>{area}</li>
-        <li>{country}</li>
-      </ul>
+      <p>{area}</p>
+      <p>{country}</p>
     </li>
   );
 }
