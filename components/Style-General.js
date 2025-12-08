@@ -21,7 +21,7 @@ export const Content = styled.section`
 `;
 
 export const Title = styled.h1`
-  background: #12ad55;
+  background: var(--primary);
   font-size: 32pt;
   color: var(--primary);
   align-self: center;

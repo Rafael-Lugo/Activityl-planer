@@ -6,7 +6,7 @@ export const NavigationWrapper = styled.nav`
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #676c70ff;
+  background-color: var(--background-secondary);
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
   padding: 0;
 `;
@@ -19,28 +19,29 @@ export const NavigationList = styled.ul`
   padding: 1rem;
   list-style: none;
   gap: 2rem;
+   
 `;
 
 export const NavigationListItem = styled.li`
-  margin: 0;
-  border: 2px solid 
+  margin: 0;  
 `;
 
 export const NavigationLink = styled(Link)`
   display: flex;
+  border-radius: var(--radius);
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: #ecf0f1;
+  color: var(--primary);
   font-size: 0.9rem;
   font-weight: 500;
   padding: 0.5rem 3rem ;
   transition: all 0.3s ease;
-  background-color: ${(props) => (props.$highlighted ? "#a9a9a9" : "#000")};
+  background-color: ${(props) => (props.$highlighted ? "var(--background-foreground)" : "var(--background)")};
   
   &:hover {
-background-color:white;
-color:black;
+background-color: var(--accent);
+color: var(--accent-foreground);
   }
 
 `;
