@@ -4,6 +4,8 @@ import useSWR from "swr";
 import { useState } from "react";
 import Searchbar from "@/components/Searchbar/Searchbar";
 
+
+
 export default function HomePage() {
   const { data: activities, isLoading, error } = useSWR("/api/activities");
   const [search, setSearch] = useState("");

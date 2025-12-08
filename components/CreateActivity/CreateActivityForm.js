@@ -2,6 +2,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import countries from "world-countries";
 
+
 export default function ActivityForm() {
   const { mutate } = useSWR("/api/activities");
   const { data: categories } = useSWR("/api/categories");
