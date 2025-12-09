@@ -2,10 +2,14 @@ import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
 import { useState } from "react";
 import Navigation from "@/components/Navigation/Navigation";
+import { SessionProvider } from "next-auth/react";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   const [likedActivityIds, setLikedActivityIds] = useState([]);
 
   function toggleLiked(_id) {
@@ -17,12 +21,16 @@ export default function App({ Component, pageProps }) {
   }
 
   return (
-    <>
+    <SessionProvider session={session}>
       <GlobalStyle />
       <SWRConfig value={{ fetcher }}>
-        <Component {...pageProps} toggleLiked={toggleLiked} likedActivityIds={likedActivityIds} />
+        <Component
+          {...pageProps}
+          toggleLiked={toggleLiked}
+          likedActivityIds={likedActivityIds}
+        />
         <Navigation />
       </SWRConfig>
-    </>
+    </SessionProvider>
   );
 }
