@@ -4,6 +4,22 @@ import useSWR from "swr";
 import { useState } from "react";
 import DeleteButton from "./DeleteButton/DeleteButton";
 
+import {
+  DetailsPageWrapper,
+  DetailsPageHeader,
+  DetailsTitle,
+  DetailsImage,
+  DetailsSection,
+  DetailsLabel,
+  DetailsText,
+  InlineForm,
+  InlineInput,
+  InlineSelect,
+  InlineSaveButton,
+  EditContainer,
+  EditToggleButton,
+} from "./StyledActivityDetails";
+
 export default function ActivityDetails({ activity, onDelete }) {
   const { data: categories } = useSWR("/api/categories");
   const { mutate } = useSWR(`/api/activities/${activity._id}`);
@@ -28,101 +44,106 @@ export default function ActivityDetails({ activity, onDelete }) {
 
   return (
     <>
-      <header>
+      <DetailsPageWrapper>
+        <BackButton />
         <EditableItem
           form={
-            <form onSubmit={handleEdit}>
+            <InlineForm onSubmit={handleEdit}>
               <label>
                 <strong>Title: </strong>
-                <input name="title" defaultValue={activity.title} />
+                <InlineInput name="title" defaultValue={activity.title} />
               </label>
-              <button type="submit">Save</button>
-            </form>
+              <InlineSaveButton type="submit">Save</InlineSaveButton>
+            </InlineForm>
           }
-          display={<h1>{activity.title}</h1>}
+          display={<DetailsTitle>{activity.title}</DetailsTitle>}
         />
-      </header>
-      <main>
-        <BackButton />
-        <img
+
+        <DetailsImage
           src={activity.imageUrl}
           alt={activity.title}
           height={300}
           width={300}
         />
+
         <EditableItem
           form={
-            <form onSubmit={handleEdit}>
+            <InlineForm onSubmit={handleEdit}>
               <label>
                 <strong>Description: </strong>
-                <input name="description" defaultValue={activity.description} />
+                <InlineInput
+                  name="description"
+                  defaultValue={activity.description}
+                />
               </label>
-              <button type="submit">Save</button>
-            </form>
+              <InlineSaveButton type="submit">Save</InlineSaveButton>
+            </InlineForm>
           }
           display={
-            <p>
-              <strong>Description: </strong> {activity.description}
-            </p>
+            <DetailsSection>
+              <DetailsLabel>Description: </DetailsLabel>
+              <DetailsText>{activity.description}</DetailsText>
+            </DetailsSection>
           }
         />
 
         <EditableItem
           form={
-            <form onSubmit={handleEdit}>
+            <InlineForm onSubmit={handleEdit}>
               <label>
                 <strong>Area:</strong>
-                <input name="area" defaultValue={activity.area} />
+                <InlineInput name="area" defaultValue={activity.area} />
               </label>
-              <button type="submit">Save</button>
-            </form>
+              <InlineSaveButton type="submit">Save</InlineSaveButton>
+            </InlineForm>
           }
           display={
-            <p>
-              <strong>Area: </strong>
-              {activity.area}
-            </p>
+            <DetailsSection>
+              <DetailsLabel>Area: </DetailsLabel>
+              <DetailsText>{activity.area}</DetailsText>
+            </DetailsSection>
           }
         />
 
         <EditableItem
           form={
-            <form onSubmit={handleEdit}>
+            <InlineForm onSubmit={handleEdit}>
               <strong>Country: </strong>
-              <select name="country" defaultValue={activity.country}>
+              <InlineSelect name="country" defaultValue={activity.country}>
                 {countryList.map((country) => (
                   <option key={country} value={country}>
                     {country}
                   </option>
                 ))}
-              </select>
-              <button type="submit">Save</button>
-            </form>
+              </InlineSelect>
+              <InlineSaveButton type="submit">Save</InlineSaveButton>
+            </InlineForm>
           }
           display={
-            <p>
-              <strong>Country:</strong> {activity.country}
-            </p>
+            <DetailsSection>
+              <DetailsLabel>Country:</DetailsLabel>
+              <DetailsText>{activity.country}</DetailsText>
+            </DetailsSection>
           }
         />
 
         <EditableItem
           display={
-            <section>
-              <strong>Category:</strong>
+            <DetailsSection>
+              <DetailsLabel>Category:</DetailsLabel>
               {activity.categories?.length > 0 ? (
                 activity.categories.map((category) => (
-                  <span key={category._id}> {category.name}</span>
+                  <DetailsText key={category._id}> {category.name}</DetailsText>
                 ))
               ) : (
-                <span> No category selected</span>
+                <DetailsText> No category selected</DetailsText>
               )}
-            </section>
+            </DetailsSection>
           }
           form={
-            <form onSubmit={handleEdit}>
+            <InlineForm onSubmit={handleEdit}>
               <strong>Category: </strong>
-              <select
+              <InlineSelect
                 name="categories"
                 defaultValue={activity.categories?.[0]?._id || ""}
               >
@@ -131,13 +152,13 @@ export default function ActivityDetails({ activity, onDelete }) {
                     {category.name}
                   </option>
                 ))}
-              </select>
-              <button type="submit">Save</button>
-            </form>
+              </InlineSelect>
+              <InlineSaveButton type="submit">Save</InlineSaveButton>
+            </InlineForm>
           }
         />
-               <DeleteButton id={activity._id} onDelete={onDelete}/>
-      </main>
+        <DeleteButton id={activity._id} onDelete={onDelete} />
+      </DetailsPageWrapper>
     </>
   );
 }
@@ -145,22 +166,22 @@ export default function ActivityDetails({ activity, onDelete }) {
 function EditableItem({ form, display }) {
   const [toggleEdit, setToggleEdit] = useState(false);
   return (
-    <div>
+    <EditContainer>
       {toggleEdit ? (
-        <div
+        <EditToggleButton
           onSubmit={() => {
             setToggleEdit(false);
           }}
         >
           {form}
-        </div>
+        </EditToggleButton>
       ) : (
         display
       )}
 
-      <button onClick={() => setToggleEdit(!toggleEdit)}>
+      <EditToggleButton onClick={() => setToggleEdit(!toggleEdit)}>
         {toggleEdit ? "Cancel" : "Edit"}
-      </button>
-    </div>
+      </EditToggleButton>
+    </EditContainer>
   );
 }
