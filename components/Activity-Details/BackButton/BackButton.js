@@ -1,12 +1,12 @@
 import Link from "next/link"
-import { StyledBackButton } from "./StyledBackButton"
+import { Button } from "@/components/Button/Button"
 
 export default function BackButton (){
 
 
     return(
-        <Link href="/" passHref legacyBehavior>
-        <StyledBackButton>Back</StyledBackButton>
+        <Link href="/">
+        <Button type="button">Back</Button>
         </Link>
     )
 }

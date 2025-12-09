@@ -19,6 +19,7 @@ import {
   EditContainer,
   EditToggleButton,
 } from "./StyledActivityDetails";
+import { Button } from "../Button/Button";
 
 export default function ActivityDetails({ activity, onDelete }) {
   const { data: categories } = useSWR("/api/categories");
@@ -45,19 +46,21 @@ export default function ActivityDetails({ activity, onDelete }) {
   return (
     <>
       <DetailsPageWrapper>
-        <BackButton />
-        <EditableItem
-          form={
-            <InlineForm onSubmit={handleEdit}>
-              <label>
-                <strong>Title: </strong>
-                <InlineInput name="title" defaultValue={activity.title} />
-              </label>
-              <InlineSaveButton type="submit">Save</InlineSaveButton>
-            </InlineForm>
-          }
-          display={<DetailsTitle>{activity.title}</DetailsTitle>}
-        />
+        <DetailsPageHeader>
+          <BackButton />
+          <EditableItem
+            form={
+              <InlineForm onSubmit={handleEdit}>
+                <label>
+                  <strong>Title: </strong>
+                  <InlineInput name="title" defaultValue={activity.title} />
+                </label>
+                <Button type="submit">Save</Button>
+              </InlineForm>
+            }
+            display={<DetailsTitle>{activity.title}</DetailsTitle>}
+          />
+        </DetailsPageHeader>
 
         <DetailsImage
           src={activity.imageUrl}
@@ -76,7 +79,7 @@ export default function ActivityDetails({ activity, onDelete }) {
                   defaultValue={activity.description}
                 />
               </label>
-              <InlineSaveButton type="submit">Save</InlineSaveButton>
+              <Button type="submit">Save</Button>
             </InlineForm>
           }
           display={
@@ -94,7 +97,7 @@ export default function ActivityDetails({ activity, onDelete }) {
                 <strong>Area:</strong>
                 <InlineInput name="area" defaultValue={activity.area} />
               </label>
-              <InlineSaveButton type="submit">Save</InlineSaveButton>
+              <Button type="submit">Save</Button>
             </InlineForm>
           }
           display={
@@ -116,7 +119,7 @@ export default function ActivityDetails({ activity, onDelete }) {
                   </option>
                 ))}
               </InlineSelect>
-              <InlineSaveButton type="submit">Save</InlineSaveButton>
+              <Button type="submit">Save</Button>
             </InlineForm>
           }
           display={
@@ -153,7 +156,7 @@ export default function ActivityDetails({ activity, onDelete }) {
                   </option>
                 ))}
               </InlineSelect>
-              <InlineSaveButton type="submit">Save</InlineSaveButton>
+              <Button type="submit">Save</Button>
             </InlineForm>
           }
         />
@@ -168,20 +171,20 @@ function EditableItem({ form, display }) {
   return (
     <EditContainer>
       {toggleEdit ? (
-        <EditToggleButton
+        <Button
           onSubmit={() => {
             setToggleEdit(false);
           }}
         >
           {form}
-        </EditToggleButton>
+        </Button>
       ) : (
         display
       )}
 
-      <EditToggleButton onClick={() => setToggleEdit(!toggleEdit)}>
+      <Button onClick={() => setToggleEdit(!toggleEdit)}>
         {toggleEdit ? "Cancel" : "Edit"}
-      </EditToggleButton>
+      </Button>
     </EditContainer>
   );
 }

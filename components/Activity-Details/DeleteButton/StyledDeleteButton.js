@@ -12,15 +12,15 @@ export const DeletePrimaryButton = styled.button`
   padding: 0.5rem 1rem;
   border-radius: 999px;
   border: none;
-  background-color: #b00020;
-  color: #ffffff;
+  background-color: var(--alert);
+  color: var(--primary)();
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
 
   &:hover {
-    background-color: #c21b2f;
+    background-color: var(--alert-foreground);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   }
 `;

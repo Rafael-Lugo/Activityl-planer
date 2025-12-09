@@ -15,13 +15,15 @@ export default createGlobalStyle`
   --background-secondary: #202114;
   --background-tertiary: #626235;
   --card-foreground: #ffffff;
-  --card: #202114
+  --card: #202114;
   --primary: #c6c667;
   --secondary:  #625235;
   --terciary: #676c70ff;   
   --primary-foreground:  #c6c667;
   --accent:  #7c6eba;   
   --accent-foreground:  #faf4b0;
+  --alert: #9A3305;
+  --alert-foreground: #C74004;
 }
 
 /* .dark {
