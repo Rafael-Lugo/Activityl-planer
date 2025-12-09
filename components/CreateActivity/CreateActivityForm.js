@@ -39,11 +39,14 @@ export default function ActivityForm() {
     }
 
     const uploadResult = await uploadResponse.json();
+    console.log("Full Cloudinary response:", uploadResult);
+    
     imageUrl = {
   url: uploadResult.secure_url || uploadResult.url,
   width: uploadResult.width.toString(),
-  height: uploadResult.height.toString()
-};
+  height: uploadResult.height.toString(),
+  public_id: uploadResult.public_id,
+};console.log("Full Cloudinary response:", uploadResult);
   }
 
     activityData.imageUrl = imageUrl;

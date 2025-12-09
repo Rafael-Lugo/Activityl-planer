@@ -9,6 +9,7 @@ const activitySchema = new Schema({
     width: { type: String, required: true },
     height: { type: String, required: true },
     url: { type: String, required: true },
+    public_id:{type: String, required:true},
   },
   categories: { type: [Schema.Types.ObjectId], ref: "Category" },
   description: { type: String },

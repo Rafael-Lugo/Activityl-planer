@@ -23,14 +23,14 @@ export default async function handler(request, response) {
 
   const [fields, files] = await form.parse(request);
 
-  // we need to access files.cover here since it is the name of our file input. Replace this with the name of your input.
   const file = files.cover[0];
   const { newFilename, filepath } = file;
 
    const {
     height,
     width,
-    secure_url: url,
+    secure_url: url, 
+    public_id
     } = await cloudinary.v2.uploader.upload(filepath, {
     public_id: newFilename,
     folder: "activities",
@@ -40,5 +40,6 @@ export default async function handler(request, response) {
     height,
     width,
     url,
+    public_id,
   });
 }
