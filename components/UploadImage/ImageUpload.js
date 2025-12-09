@@ -11,7 +11,6 @@ export default function ImageUpload({ onFileSelect }) {
     const previewURL = URL.createObjectURL(file);
     setPreview(previewURL);
 
-    // Call the callback function to pass the file to the parent component
     if (onFileSelect) {
       onFileSelect(file);
     }

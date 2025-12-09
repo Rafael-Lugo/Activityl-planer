@@ -39,10 +39,14 @@ export default function ActivityForm() {
     }
 
     const uploadResult = await uploadResponse.json();
-    imageUrl = uploadResult.url;
+    imageUrl = {
+  url: uploadResult.secure_url || uploadResult.url,
+  width: uploadResult.width.toString(),
+  height: uploadResult.height.toString()
+};
   }
 
-    activityData.image = imageUrl;
+    activityData.imageUrl = imageUrl;
 
     const response = await fetch("/api/activities", {
       method: "POST",

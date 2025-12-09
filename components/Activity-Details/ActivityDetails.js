@@ -3,17 +3,46 @@ import countries from "world-countries";
 import useSWR from "swr";
 import { useState } from "react";
 import DeleteButton from "./DeleteButton/DeleteButton";
+import ImageUpload from "../UploadImage/ImageUpload";
 
 export default function ActivityDetails({ activity, onDelete }) {
   const { data: categories } = useSWR("/api/categories");
   const { mutate } = useSWR(`/api/activities/${activity._id}`);
-
+const [selectedFile, setSelectedFile] = useState(null);
   const countryList = countries.map((country) => country.name.common);
 
   async function handleEdit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const activityData = Object.fromEntries(formData);
+
+
+ let imageUrl = null;
+
+  if (selectedFile) {
+    const uploadForm = new FormData();
+    uploadForm.append("cover", selectedFile);
+
+    const uploadResponse = await fetch("/api/upload", {
+      method: "POST",
+      body: uploadForm,
+    });
+
+    if (!uploadResponse.ok) {
+      setSubmitError("Image upload failed");
+      return;
+    }
+
+    const uploadResult = await uploadResponse.json();
+    imageUrl = {
+  url: uploadResult.secure_url || uploadResult.url,
+  width: uploadResult.width.toString(),
+  height: uploadResult.height.toString()
+};
+  }
+
+    activityData.imageUrl = imageUrl;
+
     const response = await fetch(`/api/activities/${activity._id}`, {
       method: "PUT",
       headers: {
@@ -44,12 +73,24 @@ export default function ActivityDetails({ activity, onDelete }) {
       </header>
       <main>
         <BackButton />
-        <img
-          src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&h=300&fit=crop&crop=center"
+        <EditableItem
+          form={
+            <form onSubmit={handleEdit}>
+              <label>
+                <strong>Image: </strong>
+        <ImageUpload onFileSelect={(file) => setSelectedFile(file)}/>
+              </label>
+              <button type="submit">Save</button>
+            </form>
+          }
+           display={
+             <img
+          src={activity.imageUrl?.url || activity.imageUrl}
           alt={activity.title}
           height={300}
-          width={300}
         />
+          }
+          />
         <EditableItem
           form={
             <form onSubmit={handleEdit}>
