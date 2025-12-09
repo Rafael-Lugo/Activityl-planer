@@ -3,6 +3,7 @@ import GlobalStyle from "../styles";
 import { useState } from "react";
 import Navigation from "@/components/Navigation/Navigation";
 import { SessionProvider } from "next-auth/react";
+import TopRightLogin from "@/components/Login/TopRightLogin";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
@@ -24,6 +25,7 @@ export default function App({
     <SessionProvider session={session}>
       <GlobalStyle />
       <SWRConfig value={{ fetcher }}>
+        <TopRightLogin />
         <Component
           {...pageProps}
           toggleLiked={toggleLiked}
