@@ -11,10 +11,7 @@ export default function FavoriteButton({ _id, toggleLiked, isLiked }) {
     >
       <BookmarkIcon
         width={28}
-        height={28}
-        stroke="var(--accent)"
-        fill={isLiked ? "var(--accent)" : "none"}
-      />
+        height={28} />
     </IconButton>
   );
 }

@@ -37,13 +37,9 @@ export default createGlobalStyle`
 } */
 
 body {
-   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  margin: 0;
   font-family: system-ui;
-  justify-content: center;
   background: var(--background);
-  padding-top: 80px;
 
 }
 `;

@@ -32,7 +32,7 @@ export const Title = styled.h1`
 export const Subtitle = styled.h2`
   font-size: 18pt;
   text-align: center;
-  padding: 0;
+  padding: 0 10rem 0 10rem;
   margin: 0;
   color: var(--secondary);
 `;
@@ -175,6 +175,8 @@ export const IconButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: ${({ $isLiked }) =>
+    $isLiked ? "var(--accent)" : "var(--primary)"};
 
   svg {
     width: 32px;
@@ -183,8 +185,8 @@ export const IconButton = styled.button`
 
   svg path {
     stroke: var(--accent);
-    fill: ${({ isLiked }) => (isLiked ? "var(--accent)" : "transparent")};
-    transition: fill 0.2s ease;
+    fill: ${({ $isLiked }) => ($isLiked ? "var(--accent)" : "none")};
+    transition: fill 0.2s ease; stroke 0.2s ease;
   }
 
   &:hover svg path {

@@ -5,7 +5,7 @@ export default function BackButton (){
 
 
     return(
-        <Link href="/">
+        <Link href="/" passHref legacyBehavior>
         <StyledBackButton>Back</StyledBackButton>
         </Link>
     )
