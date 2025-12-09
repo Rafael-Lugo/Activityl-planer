@@ -7,12 +7,11 @@ import {
   Subtitle,
   StyledForm,
   StyledLabel,
-  StyledInput,  
+  StyledInput,
   StyledSelect,
   StyledFormButton,
   StyledTextarea,
 } from "../Style-General";
-
 
 export default function ActivityForm() {
   const { mutate } = useSWR("/api/activities");
@@ -59,14 +58,22 @@ export default function ActivityForm() {
           Title:*
           <StyledInput type="text" id="title" name="title" required />
         </StyledLabel>
+
         <StyledLabel htmlFor="description">
           Description:
-          <StyledInput type="text" id="description" name="description" />
+          <StyledTextarea
+            type="text"
+            id="description"
+            name="description"
+            rows={4}
+            placeholder="Describe your activity"
+          />
         </StyledLabel>
+
         <StyledLabel htmlFor="category">
           Please select a category*
           <StyledSelect id="category" name="category" required>
-            <StyledTextarea value="Select Category">Please select a category</StyledTextarea>
+            <option value="Select Category">Please select a category</option>
             {categories?.map((category) => (
               <option key={category._id} value={category.name}>
                 {category.name}
@@ -74,10 +81,12 @@ export default function ActivityForm() {
             ))}
           </StyledSelect>
         </StyledLabel>
+
         <StyledLabel htmlFor="area">
           Area:
           <StyledInput type="text" id="area" name="area" />
         </StyledLabel>
+
         <StyledLabel htmlFor="country">
           Country:
           <StyledSelect id="country" name="country">
@@ -88,6 +97,7 @@ export default function ActivityForm() {
             ))}
           </StyledSelect>
         </StyledLabel>
+
         <StyledFormButton type="submit">Submit</StyledFormButton>
         {submitError && <p>{submitError}</p>}
         {successMessage && <p>{successMessage}</p>}

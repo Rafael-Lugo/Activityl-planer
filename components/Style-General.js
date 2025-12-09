@@ -229,11 +229,12 @@ export const StyledTextarea = styled.textarea`
   padding: 0.6rem 0.75rem;
   border-radius: 0.5rem;
   border: 1px solid var(--card);
-  background-color: var(--background-secondary);
+  background-color: var(--background-foreground);
   color: var(--primary);
   font-size: 10pt;
   resize: vertical;
   box-sizing: border-box;
+  font: inherit;
 
   &:focus {
     outline: 2px solid var(--accent);
