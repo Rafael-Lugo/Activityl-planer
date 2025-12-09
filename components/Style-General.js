@@ -191,3 +191,91 @@ export const IconButton = styled.button`
     fill: var(--accent);
   }
 `;
+
+// Form Styles
+
+export const Container = styled.section`
+  flex: 1;
+  padding: 1.5rem 1.5rem 10rem;
+`;
+
+export const StyledLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 12pt;
+  font-weight: normal;
+  color: var(--primary);
+`;
+
+export const StyledInput = styled.input`
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  background-color: var(--background-foreground);
+  color: var(--primary);
+  font: inherit;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+`;
+
+export const StyledTextarea = styled.textarea`
+  width: 100%;
+  min-height: 5rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--card);
+  background-color: var(--background-secondary);
+  color: var(--primary);
+  font-size: 10pt;
+  resize: vertical;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+`;
+
+export const StyledSelect = styled.select`
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  background-color: var(--background-foreground);
+  color: var(--primary);
+  font: inherit;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+`;
+
+export const StyledFormButton = styled.button`
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  font-weight: bold;
+  font-size: 12pt;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+`;
