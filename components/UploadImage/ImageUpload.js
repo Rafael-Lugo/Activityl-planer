@@ -35,25 +35,3 @@ export default function ImageUpload({ onFileSelect }) {
     </>
   );
 }
-
-const StyledInput = styled.input`
-  padding: 8px;
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  &:focus {
-    border-color: #0056b3;
-    outline: none;
-  }
-`;
-
-const StyledFileInput = styled(StyledInput).attrs({
-  type: "file",
-})`
-  padding: 10px;
-  border: none;
-  &:focus {
-    border-color: #0056b3;
-    outline: none;
-  }
-`;
