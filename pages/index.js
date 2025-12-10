@@ -4,22 +4,25 @@ import { useEffect, useState } from "react";
 import Searchbar from "@/components/Searchbar/Searchbar";
 import { useSession } from "next-auth/react";
 import { StyledSuccessMessageDiv } from "@/components/Login/StyledMessages";
+import { Router, useRouter } from "next/router";
 
 export default function HomePage({ likedActivityIds, toggleLiked }) {
   const { data: activities, isLoading, error } = useSWR("/api/activities");
   const [search, setSearch] = useState("");
 
   // pop up message upon successful login
+  const router = useRouter();
+  const { login } = router.query;
   const { data: session } = useSession();
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
-    if (session) {
+    if (login === "success") {
       setShowSuccessMessage(true);
       const timer = setTimeout(() => setShowSuccessMessage(false), 3000);
       return () => clearTimeout(timer);
     }
-  }, [session]);
+  }, [login]);
 
   if (isLoading) return <p>Loading activities…</p>;
   if (error) return <p>Error loading activities.</p>;

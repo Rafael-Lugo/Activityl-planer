@@ -20,7 +20,7 @@ export default function LoginComponent() {
         <StyledLoginBoxDiv>
           <StyledLoginHeader>Login using:</StyledLoginHeader>
           <StyledLoginButton
-            onClick={() => signIn("github", { callbackUrl: "/" })}
+            onClick={() => signIn("github", { callbackUrl: "/?login=success" })}
           >
             <Image
               src="/githubLogo.png"
