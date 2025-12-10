@@ -13,8 +13,8 @@ export const DeletePrimaryButton = styled.button`
   border-radius: 999px;
   border: none;
   background-color: var(--alert);
-  color: var(--primary)();
-  font-size: 0.9rem;
+  color: var(--card-foreground);
+  font-size: 0.81rem;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
@@ -47,7 +47,7 @@ export const ConfirmButton = styled.button`
   border: none;
   cursor: pointer;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   transition: background-color 0.15s ease, color 0.15s ease;
 
   ${({ $variant }) =>
@@ -59,8 +59,8 @@ export const ConfirmButton = styled.button`
     &:hover { background-color: var(--primary); color: var(--background); }
   `
       : `
-    background-color: #b00020;
+    background-color: var(--alert);
     color: #ffffff;
-    &:hover { background-color: #c21b2f; }
+    &:hover { background-color: var(--alert-foreground); }
   `};
 `;

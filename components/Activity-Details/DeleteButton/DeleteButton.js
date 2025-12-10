@@ -26,7 +26,7 @@ import {
     return (
       <DeleteButtonWrapper>
         <DeletePrimaryButton  type="button" onClick={handleFirstClick}>
-          Delete
+          Delete activity
         </DeletePrimaryButton>
       </DeleteButtonWrapper>
     );

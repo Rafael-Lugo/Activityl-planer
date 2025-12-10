@@ -10,13 +10,15 @@ export default createGlobalStyle`
 
   :root {   
   --radius: 0.5rem;   
-  --background:  #343607;
+  --background:  #B3B49F;
   --background-foreground: #929252ff;
   --background-secondary: #202114;
   --background-tertiary: #626235;
   --card-foreground: #ffffff;
+  --input: #000000;
   --card: #202114;
-  --primary: #c6c667;
+  --bookmark: #343607;
+  --primary: #E3E363;
   --secondary:  #625235;
   --terciary: #676c70ff;   
   --primary-foreground:  #c6c667;

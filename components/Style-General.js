@@ -1,4 +1,3 @@
-import { Image } from "lucide-react";
 import styled from "styled-components";
 
 export const PageWrapper = styled.div`
@@ -176,7 +175,7 @@ export const IconButton = styled.button`
   align-items: center;
   justify-content: center;
   color: ${({ $isLiked }) =>
-    $isLiked ? "var(--accent)" : "var(--primary)"};
+    $isLiked ? "var(--accent)" : "var(--background)"};
 
   svg {
     width: 32px;
