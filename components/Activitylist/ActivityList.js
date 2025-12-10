@@ -1,10 +1,10 @@
 import ActivityCard from "./ActivityCard";
 
-
-
-export default function ActivityList({ activities, likedActivityIds, toggleLiked, }) {
-
-
+export default function ActivityList({
+  activities,
+  likedActivityIds,
+  toggleLiked,
+}) {
   return (
     <ul>
       {activities.map((activity) => (
@@ -24,5 +24,3 @@ export default function ActivityList({ activities, likedActivityIds, toggleLiked
     </ul>
   );
 }
-
-

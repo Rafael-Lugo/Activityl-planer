@@ -3,16 +3,15 @@ import useSWR from "swr";
 import countries from "world-countries";
 import ImageUpload from "../UploadImage/ImageUpload";
 
-
 export default function ActivityForm() {
   const { mutate } = useSWR("/api/activities");
   const { data: categories } = useSWR("/api/categories");
   const [submitError, setSubmitError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [formKey, setFormKey] = useState(0);
 
   async function handleSubmit(event) {
-    
     event.preventDefault();
 
     //reset error and success messages
@@ -22,32 +21,31 @@ export default function ActivityForm() {
     const formData = new FormData(event.target);
     const activityData = Object.fromEntries(formData);
 
- let imageUrl = null;
+    let imageUrl = null;
 
-  if (selectedFile) {
-    const uploadForm = new FormData();
-    uploadForm.append("cover", selectedFile);
+    if (selectedFile) {
+      const uploadForm = new FormData();
+      uploadForm.append("cover", selectedFile);
 
-    const uploadResponse = await fetch("/api/upload", {
-      method: "POST",
-      body: uploadForm,
-    });
+      const uploadResponse = await fetch("/api/upload", {
+        method: "POST",
+        body: uploadForm,
+      });
 
-    if (!uploadResponse.ok) {
-      setSubmitError("Image upload failed");
-      return;
+      if (!uploadResponse.ok) {
+        setSubmitError("Image upload failed");
+        return;
+      }
+
+      const uploadResult = await uploadResponse.json();
+
+      imageUrl = {
+        url: uploadResult.secure_url || uploadResult.url,
+        width: uploadResult.width.toString(),
+        height: uploadResult.height.toString(),
+        public_id: uploadResult.public_id,
+      };
     }
-
-    const uploadResult = await uploadResponse.json();
-    console.log("Full Cloudinary response:", uploadResult);
-    
-    imageUrl = {
-  url: uploadResult.secure_url || uploadResult.url,
-  width: uploadResult.width.toString(),
-  height: uploadResult.height.toString(),
-  public_id: uploadResult.public_id,
-};console.log("Full Cloudinary response:", uploadResult);
-  }
 
     activityData.imageUrl = imageUrl;
 
@@ -63,12 +61,12 @@ export default function ActivityForm() {
       setSubmitError("Failed to create activity.");
       return;
     }
-
     //activity to go on top and successmessage
     setSuccessMessage("Activity has been created!");
     mutate();
     event.target.reset();
     setSelectedFile(null);
+    setFormKey((prev) => prev + 1);
   }
 
   // world countries library
@@ -79,7 +77,10 @@ export default function ActivityForm() {
       <h1>Create your Activity</h1>
       <form onSubmit={handleSubmit}>
         <label placeholder="Enter picture">Bild</label>
-        <ImageUpload onFileSelect={(file) => setSelectedFile(file)}/>
+        <ImageUpload
+          key={formKey}
+          onFileSelect={(file) => setSelectedFile(file)}
+        />
         <label htmlFor="title">
           Title:*
           <input type="text" id="title" name="title" required />

@@ -23,10 +23,6 @@ export default function HomePage({ likedActivityIds, toggleLiked }) {
       })
     : [];
 
-  console.log("Activities:", activities);
-  console.log("FilterActivities:", filterActivities);
-  console.log("Search:", search);
-
   return (
     <>
       <h1>Activity Planner</h1>

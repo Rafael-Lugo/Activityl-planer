@@ -8,7 +8,7 @@ import ImageUpload from "../UploadImage/ImageUpload";
 export default function ActivityDetails({ activity, onDelete }) {
   const { data: categories } = useSWR("/api/categories");
   const { mutate } = useSWR(`/api/activities/${activity._id}`);
-const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const countryList = countries.map((country) => country.name.common);
 
   async function handleEdit(event) {
@@ -16,30 +16,30 @@ const [selectedFile, setSelectedFile] = useState(null);
     const formData = new FormData(event.target);
     const activityData = Object.fromEntries(formData);
 
+    let imageUrl = null;
 
- let imageUrl = null;
+    if (selectedFile) {
+      const uploadForm = new FormData();
+      uploadForm.append("cover", selectedFile);
 
-  if (selectedFile) {
-    const uploadForm = new FormData();
-    uploadForm.append("cover", selectedFile);
+      const uploadResponse = await fetch("/api/upload", {
+        method: "POST",
+        body: uploadForm,
+      });
 
-    const uploadResponse = await fetch("/api/upload", {
-      method: "POST",
-      body: uploadForm,
-    });
+      if (!uploadResponse.ok) {
+        setSubmitError("Image upload failed");
+        return;
+      }
 
-    if (!uploadResponse.ok) {
-      setSubmitError("Image upload failed");
-      return;
+      const uploadResult = await uploadResponse.json();
+      imageUrl = {
+        url: uploadResult.secure_url || uploadResult.url,
+        width: uploadResult.width.toString(),
+        height: uploadResult.height.toString(),
+        public_id: uploadResult.public_id,
+      };
     }
-
-    const uploadResult = await uploadResponse.json();
-    imageUrl = {
-  url: uploadResult.secure_url || uploadResult.url,
-  width: uploadResult.width.toString(),
-  height: uploadResult.height.toString()
-};
-  }
 
     activityData.imageUrl = imageUrl;
 
@@ -78,19 +78,19 @@ const [selectedFile, setSelectedFile] = useState(null);
             <form onSubmit={handleEdit}>
               <label>
                 <strong>Image: </strong>
-        <ImageUpload onFileSelect={(file) => setSelectedFile(file)}/>
+                <ImageUpload onFileSelect={(file) => setSelectedFile(file)} />
               </label>
               <button type="submit">Save</button>
             </form>
           }
-           display={
-             <img
-          src={activity.imageUrl?.url || activity.imageUrl}
-          alt={activity.title}
-          height={300}
-        />
+          display={
+            <img
+              src={activity.imageUrl?.url || activity.imageUrl}
+              alt={activity.title}
+              height={300}
+            />
           }
-          />
+        />
         <EditableItem
           form={
             <form onSubmit={handleEdit}>
@@ -177,7 +177,7 @@ const [selectedFile, setSelectedFile] = useState(null);
             </form>
           }
         />
-               <DeleteButton id={activity._id} onDelete={onDelete}/>
+        <DeleteButton id={activity._id} onDelete={onDelete} />
       </main>
     </>
   );

@@ -12,26 +12,25 @@ export default async function handlerDetails(request, response) {
   await dbConnect();
   const { id } = request.query;
 
-
-if(request.method === "DELETE"){
-  const existing = await Activity.findById(id);
-  if (!existing) {
-    response.status(404).json({ status: "Not found"});
-    return;
-  }
-  
-  if (existing.imageUrl?.public_id){
-    try {
-      console.log("Deleting from Cloudinary:", existing.imageUrl.public_id);
-      const result = await cloudinary.v2.uploader.destroy(existing.imageUrl.public_id);
-      console.log("Cloudinary delete result:", result);
-    } catch (error) {
-      console.error("Cloudinary delete failed:", error);
+  if (request.method === "DELETE") {
+    const existing = await Activity.findById(id);
+    if (!existing) {
+      response.status(404).json({ status: "Not found" });
+      return;
     }
-  }
 
-      await Activity.findByIdAndDelete(id);
-      response.status(200).json({status: `Activity ${id} succsessfully deleted.`})
+    if (existing.imageUrl?.public_id) {
+      try {
+        await cloudinary.v2.uploader.destroy(existing.imageUrl.public_id);
+      } catch (error) {
+        console.error("Cloudinary delete failed:", error);
+      }
+    }
+
+    await Activity.findByIdAndDelete(id);
+    response
+      .status(200)
+      .json({ status: `Activity ${id} succsessfully deleted.` });
     return;
   }
 
@@ -47,21 +46,21 @@ if(request.method === "DELETE"){
     return;
   }
   if (request.method === "PUT") {
-    const existing= await Activity.findById(id)
+    const existing = await Activity.findById(id);
     if (!existing) {
-      response.status(404).json({ status: "Not found"})
+      response.status(404).json({ status: "Not found" });
     }
-  
-    if (request.body.imageUrl && existing.imageUrl?.public_id){
+
+    if (request.body.imageUrl && existing.imageUrl?.public_id) {
       await cloudinary.v2.uploader.destroy(existing.imageUrl.public_id);
     }
 
-     const updatedActivity = await Activity.findByIdAndUpdate(
-    id, 
-    { ...request.body },
-    { new: true }
-  );
-    
+    const updatedActivity = await Activity.findByIdAndUpdate(
+      id,
+      { ...request.body },
+      { new: true }
+    );
+
     response.status(200).json(updatedActivity);
     return;
   }
