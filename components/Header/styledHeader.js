@@ -28,7 +28,7 @@ export const HeaderContent = styled.div`
 `;
 
 export const HeaderTitle = styled.h1`
-  font-size: 2%.69;
+  font-size: 2.69;
   font-weight: 700;
   margin: 0;
   color: var(--primary);
