@@ -33,7 +33,7 @@ export const NavigationListItem = styled.li`
 export const NavigationLink = styled(Link)`
   display: flex;
   border-radius: 999px;
-  /* flex-direction: column; */
+ 
   justify-content: center;
   text-decoration: none;
   color: ${({ $highlighted }) =>
@@ -41,11 +41,13 @@ export const NavigationLink = styled(Link)`
   font-size: 0.9rem;
   font-weight: 500;
   padding: 0.5rem;
-  transition: all 0.2s ease;
-  /* background-color: ${(props) =>
-    props.$highlighted
-      ? "var(--background-foreground)"
-      : "var(--background-secondary)"}; */
+  transition:
+    transform 0.15s ease,
+    filter 0.2s ease,
+    color 0.2s ease,
+    stroke 0.2s ease,
+    fill 0.2s ease;
+  
 
   svg {
     width: 48px;
@@ -59,13 +61,19 @@ export const NavigationLink = styled(Link)`
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
-    /* stroke: ${(props) =>
-      props.$highlighted ? "var(--accent-foreground)" : "var(--background)"}; */
+   
     fill: none;
+    transition: stroke 0.2s ease, fill 0.2s ease;
   }
 
   &:hover {
-    color: var(--accent);
-    /* background-color: var(--background-foreground); */
+    transform: translateY(-1px);
+    filter: brightness(1.15);
+    color: var(--accent);    
   }
+
+    &:hover svg path {
+    stroke: var(--accent);
+    fill: none;
+    }
 `;

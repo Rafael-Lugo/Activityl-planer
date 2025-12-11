@@ -101,10 +101,17 @@ export const InlineSaveButton = styled.button`
   font-size: 0.81rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 
   &:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    background-color: var(--accent-foreground);
+    color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   }
 `;
 
@@ -138,13 +145,17 @@ export const EditToggleButton = styled.button`
   font-size: 0.81rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease,
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease,
     box-shadow 0.15s ease;
 
   &:hover {
-    background-color: var(--primary);
-    color: var(--background);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+     background-color: var(--primary);
+    color: var(--background-secondary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   }
 `;
 

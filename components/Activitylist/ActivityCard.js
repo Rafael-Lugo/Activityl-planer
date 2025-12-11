@@ -23,8 +23,7 @@ export default function ActivityCard({
 }) {
   const isLiked = likedActivityIds?.includes(_id);
 
-  console.log("ActivityCard imageUrl:", imageUrl);
-
+  
   return (
     <>
       <Card>

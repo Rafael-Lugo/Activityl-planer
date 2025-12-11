@@ -55,12 +55,12 @@ export default function ActivityForm() {
       <Subtitle>Create your Activity</Subtitle>
       <StyledForm onSubmit={handleSubmit}>
         <StyledLabel htmlFor="title">
-          Title:*
+          Title
           <StyledInput type="text" id="title" name="title" required />
         </StyledLabel>
 
         <StyledLabel htmlFor="description">
-          Description:
+          Description
           <StyledTextarea
             type="text"
             id="description"
@@ -71,7 +71,7 @@ export default function ActivityForm() {
         </StyledLabel>
 
         <StyledLabel htmlFor="category">
-          Please select a category*
+          Please select a category
           <StyledSelect id="category" name="category" required>
             <option value="Select Category">Please select a category</option>
             {categories?.map((category) => (
@@ -83,12 +83,12 @@ export default function ActivityForm() {
         </StyledLabel>
 
         <StyledLabel htmlFor="area">
-          Area:
+          Area
           <StyledInput type="text" id="area" name="area" />
         </StyledLabel>
 
         <StyledLabel htmlFor="country">
-          Country:
+          Country
           <StyledSelect id="country" name="country">
             {countryList.map((country) => (
               <option key={country} value={country}>

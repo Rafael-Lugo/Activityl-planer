@@ -46,6 +46,7 @@ export default function ActivityDetails({ activity, onDelete }) {
     });
     if (response.ok) {
       mutate();
+      setToggleEdit(false)
     }
   }
 

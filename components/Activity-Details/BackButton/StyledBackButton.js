@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import Link from "next/link";
 
-export const StyledBackButton = styled.button`
+export const StyledBackButton = styled(Link)`
   background-color: var(--background-secondary);
   border: none;
   padding: 0.6rem;
@@ -9,9 +10,15 @@ export const StyledBackButton = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  width: 56px;
+  height: 56px;
+  
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-  transition: background-color 0.2s ease, box-shadow 0.2s ease,
-    transform 0.15s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 
   svg {
     width: 32px;
@@ -26,8 +33,9 @@ export const StyledBackButton = styled.button`
 
   &:hover {
     background-color: var(--accent);
+    color: var(--accent-foreground);
     transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   }
 
   &:hover svg path {

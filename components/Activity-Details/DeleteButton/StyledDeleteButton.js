@@ -17,11 +17,17 @@ export const DeletePrimaryButton = styled.button`
   font-size: 0.81rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 
   &:hover {
     background-color: var(--alert-foreground);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    color: var(--card-foreground);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   }
 `;
 
