@@ -28,14 +28,18 @@ export default async function handler(request, response) {
   }
   if (request.method === "POST") {
     const activityData = request.body;
+    console.log("📌 POST BODY:", activityData);
     const coords = await geocode(
       `${activityData.area}, ${activityData.country}`
     );
+    console.log("📌 GEOCODING RETURN:", coords);
 
     activityData.latitude = coords.latitude;
     activityData.longitude = coords.longitude;
 
-    await Activity.create(activityData);
+    const created = await Activity.create(activityData);
+    console.log("📌 DB GESPEICHERT:", created);
+
     response.status(201).json({ status: "Activity created." });
     return;
   }

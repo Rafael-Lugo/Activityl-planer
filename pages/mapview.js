@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const MapViewInner = dynamic(() => import("../components/MapViewInner"), {
+const MapViewInner = dynamic(() => import("../components/Map/MapViewInner"), {
   ssr: false,
 });
 
