@@ -4,54 +4,79 @@ import useSWR from "swr";
 import { useState } from "react";
 import DeleteButton from "./DeleteButton/DeleteButton";
 import ImageUpload from "../UploadImage/ImageUpload";
+import ImageLoadingPlaceholder from "./ImageLoadingPlaceholder";
 
 export default function ActivityDetails({ activity, onDelete }) {
   const { data: categories } = useSWR("/api/categories");
   const { mutate } = useSWR(`/api/activities/${activity._id}`);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isEditingImage, setIsEditingImage] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(null);
   const countryList = countries.map((country) => country.name.common);
 
   async function handleEdit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const activityData = Object.fromEntries(formData);
-
-    let imageUrl = null;
 
     if (selectedFile) {
-      const uploadForm = new FormData();
-      uploadForm.append("cover", selectedFile);
-
-      const uploadResponse = await fetch("/api/upload", {
-        method: "POST",
-        body: uploadForm,
-      });
-
-      if (!uploadResponse.ok) {
-        setSubmitError("Image upload failed");
-        return;
-      }
-
-      const uploadResult = await uploadResponse.json();
-      imageUrl = {
-        url: uploadResult.secure_url || uploadResult.url,
-        width: uploadResult.width.toString(),
-        height: uploadResult.height.toString(),
-        public_id: uploadResult.public_id,
-      };
+      setIsEditingImage(true);
+      setUploadProgress("Uploading new image...");
     }
 
-    activityData.imageUrl = imageUrl;
+    try {
+      const formData = new FormData(event.target);
+      const activityData = Object.fromEntries(formData);
 
-    const response = await fetch(`/api/activities/${activity._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(activityData),
-    });
-    if (response.ok) {
+      let imageUrl = null;
+
+      if (selectedFile) {
+        const uploadForm = new FormData();
+        uploadForm.append("cover", selectedFile);
+
+        const uploadResponse = await fetch("/api/upload", {
+          method: "POST",
+          body: uploadForm,
+        });
+
+        if (!uploadResponse.ok) {
+          throw new Error("Image upload failed");
+        }
+
+        const uploadResult = await uploadResponse.json();
+        imageUrl = {
+          url: uploadResult.secure_url || uploadResult.url,
+          width: uploadResult.width.toString(),
+          height: uploadResult.height.toString(),
+          public_id: uploadResult.public_id,
+        };
+
+        setUploadProgress("Image updated successfully!");
+      }
+
+      setUploadProgress("Updating activity...");
+
+      activityData.imageUrl = imageUrl;
+
+      const response = await fetch(`/api/activities/${activity._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(activityData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update activity");
+      }
+
+      // Success - clear states
+      setIsEditingImage(false);
+      setUploadProgress(null);
+      setSelectedFile(null);
       mutate();
+    } catch (error) {
+      console.error("Edit failed:", error);
+      setIsEditingImage(false);
+      setUploadProgress(null);
     }
   }
 
@@ -84,11 +109,15 @@ export default function ActivityDetails({ activity, onDelete }) {
             </form>
           }
           display={
-            <img
-              src={activity.imageUrl?.url || activity.imageUrl}
-              alt={activity.title}
-              height={300}
-            />
+            isEditingImage ? (
+              <ImageLoadingPlaceholder message={uploadProgress} />
+            ) : (
+              <img
+                src={activity.imageUrl?.url || activity.imageUrl}
+                alt={activity.title}
+                height={300}
+              />
+            )
           }
         />
         <EditableItem
