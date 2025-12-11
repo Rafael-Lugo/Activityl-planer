@@ -10,6 +10,8 @@ const activitySchema = new Schema({
   description: { type: String },
   area: { type: String },
   country: { type: String },
+  latitude: { type: Number },
+  longitude: { type: Number },
 });
 
 const Activity =
