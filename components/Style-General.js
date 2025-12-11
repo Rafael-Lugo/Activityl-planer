@@ -185,7 +185,7 @@ export const IconButton = styled.button`
   svg path {
     stroke: var(--accent);
     fill: ${({ $isLiked }) => ($isLiked ? "var(--accent)" : "none")};
-    transition: fill 0.2s ease; stroke 0.2s ease;
+    transition: fill 0.2s ease, stroke 0.2s ease;
   }
 
   &:hover svg path {

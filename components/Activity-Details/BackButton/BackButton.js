@@ -1,12 +1,13 @@
 import Link from "next/link"
-import { Button } from "@/components/Button/Button"
+import { StyledBackButton } from "./StyledBackButton"
+import BackIcon from "@/components/icons/back.svg"
+
 
 export default function BackButton (){
-
-
     return(
         <Link href="/">
-        <Button type="button">Back</Button>
+            <StyledBackButton aria-label="Back to Activities"><BackIcon width={28} height={28} />
+            </StyledBackButton>
         </Link>
-    )
+    );
 }

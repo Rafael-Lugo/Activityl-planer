@@ -1,24 +1,42 @@
 import styled from "styled-components";
 
 export const StyledBackButton = styled.button`
-  display: flex;
+  background-color: var(--background-secondary);
+  border: none;
+  padding: 0.6rem;
+  border-radius: 999px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6rem 0rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--primary);
-  background-color: var(--background-foreground);
-  color: var(--primary);
-  font-size: 10pt;
-  font-weight: normal;
-  text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease,
-    box-shadow 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.15s ease;
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  svg path {
+    stroke: var(--primary);
+    fill: var(--primary);
+    transition: fill 0.2s ease, stroke 0.2s ease;
+  }
 
   &:hover {
     background-color: var(--accent);
-    color: var(--accent-foreground);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover svg path {
+    stroke: var(--background);
+    fill: var(--background);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   }
 `;
