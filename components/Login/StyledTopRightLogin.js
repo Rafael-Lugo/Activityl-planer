@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const StyledLoginDiv = styled.div`
-  position: fixed;
+  position: absolute;
   top: 1rem;
   right: 1rem;
+  z-index: 1000;
 `;
 export const StyledLoginLink = styled.a`
   display: inline-block;
@@ -21,4 +22,8 @@ export const StyledLoginLink = styled.a`
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
+`;
+
+export const StyledRelativeDiv = styled.div`
+  position: relative;
 `;
