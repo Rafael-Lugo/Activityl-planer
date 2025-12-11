@@ -31,7 +31,7 @@ export const Title = styled.h1`
 export const Subtitle = styled.h2`
   font-size: 18pt;
   text-align: center;
-  padding: 7rem 0rem 0 0rem;
+  padding: 7rem 0rem 2rem 0rem;
   margin: 0;
   color: var(--secondary);
 `;
@@ -204,8 +204,8 @@ export const StyledLabel = styled.label`
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  font-size: 12pt;
-  font-weight: normal;
+  font-size: 1.31rem;
+  font-weight: 600;
   color: var(--primary);
 `;
 
@@ -214,7 +214,7 @@ export const StyledInput = styled.input`
   padding: 0.6rem 0.8rem;
   border-radius: 0.5rem;
   border: 2px solid transparent;
-  background-color: var(--background-foreground);
+  background-color: var(--card-foreground);
   color: var(--primary);
   font: inherit;
 
@@ -230,9 +230,9 @@ export const StyledTextarea = styled.textarea`
   padding: 0.6rem 0.75rem;
   border-radius: 0.5rem;
   border: 1px solid var(--card);
-  background-color: var(--background-foreground);
-  color: var(--primary);
-  font-size: 10pt;
+  background-color: var(--card-foreground);
+  color: var(--input);
+  font-size: 1.19rem;
   resize: vertical;
   box-sizing: border-box;
   font: inherit;
@@ -248,8 +248,8 @@ export const StyledSelect = styled.select`
   padding: 0.6rem 0.8rem;
   border-radius: 0.5rem;
   border: 2px solid transparent;
-  background-color: var(--background-foreground);
-  color: var(--primary);
+  background-color: var(--card-foreground);
+  color: var(--input);
   font: inherit;
 
   &:focus {
