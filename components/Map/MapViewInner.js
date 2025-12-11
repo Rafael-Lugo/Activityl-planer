@@ -63,7 +63,7 @@ export default function MapViewInner() {
             position={[activity.latitude, activity.longitude]}
           >
             <Popup>
-              <strong>{activity.title}</strong>
+              <h1>{activity.title}</h1>
               <br />
               {activity.area}, {activity.country}
               <br />
