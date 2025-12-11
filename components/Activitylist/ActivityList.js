@@ -12,10 +12,10 @@ export default function ActivityList({
           <ActivityCard
             _id={activity._id}
             title={activity.title}
-            imageUrl={activity.imageUrl}
             description={activity.description}
             area={activity.area}
             country={activity.country}
+            imageUrl={activity.imageUrl}
             likedActivityIds={likedActivityIds}
             toggleLiked={toggleLiked}
           />
