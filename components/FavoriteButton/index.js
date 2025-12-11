@@ -7,7 +7,7 @@ export default function FavoriteButton({ _id, toggleLiked, isLiked }) {
       type="button"
       onClick={() => toggleLiked(_id)} //arrow function on _id
       aria-label={isLiked ? "unlike" : "like"}
-      isLiked={isLiked}
+      $isLiked={isLiked}
     >
       <BookmarkIcon
         width={28}

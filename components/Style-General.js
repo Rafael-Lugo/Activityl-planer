@@ -126,7 +126,7 @@ export const CardBookmarkWrapper = styled.div`
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--background);
+  background: var(--bookmark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,9 +174,7 @@ export const IconButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ $isLiked }) =>
-    $isLiked ? "var(--accent)" : "var(--background)"};
-
+  
   svg {
     width: 32px;
     height: 32px;
