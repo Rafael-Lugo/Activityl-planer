@@ -2,6 +2,8 @@ import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
 import { useState } from "react";
 import Navigation from "@/components/Navigation/Navigation";
+import "leaflet/dist/leaflet.css";
+
 import { SessionProvider } from "next-auth/react";
 import TopRightLogin from "@/components/Login/TopRightLogin";
 
