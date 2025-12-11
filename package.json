@@ -20,7 +20,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-leaflet": "^4.2.1",
-    "styled-components": "^6.0.2",
+    "styled-components": "^6.1.19",
     "swr": "^2.3.7",
     "world-countries": "^5.1.0"
   },
