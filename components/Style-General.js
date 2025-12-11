@@ -31,7 +31,7 @@ export const Title = styled.h1`
 export const Subtitle = styled.h2`
   font-size: 18pt;
   text-align: center;
-  padding: 0 10rem 0 10rem;
+  padding: 7rem 0rem 0 0rem;
   margin: 0;
   color: var(--secondary);
 `;
@@ -44,8 +44,10 @@ export const CardDescription = styled.h3`
 
 export const Text = styled.p`
   color: var(--secondary);
-  font-size: 10pt;
-  margin: 0 5rem 0 0;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 3rem;
 `;
 
 export const StyledForm = styled.form`

@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import ActivityList from "@/components/Activitylist/ActivityList";
+import { Subtitle, Text } from "@/components/Style-General";
 
 export default function FavoritesPage({ likedActivityIds, toggleLiked }) {
   const { data: activities, isLoading, error } = useSWR("/api/activities");
@@ -15,10 +16,10 @@ export default function FavoritesPage({ likedActivityIds, toggleLiked }) {
 
   return (
     <>
-      <h1>Favorites Activities:</h1>
+      <Subtitle>Favorites Activities:</Subtitle>
       
        {favoriteActivities.length === 0 ? (
-        <p>No activities yet.</p>
+        <Text>No activities yet.</Text>
       ) : (
       <ActivityList
         activities={favoriteActivities}
