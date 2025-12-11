@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Searchbar from "@/components/Searchbar/Searchbar";
 import { useSession } from "next-auth/react";
 import { StyledSuccessMessageDiv } from "@/components/Login/StyledMessages";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 export default function HomePage({ likedActivityIds, toggleLiked }) {
   const { data: activities, isLoading, error } = useSWR("/api/activities");
@@ -17,12 +17,12 @@ export default function HomePage({ likedActivityIds, toggleLiked }) {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
-    if (login === "success") {
+    if (login === "success" && session) {
       setShowSuccessMessage(true);
       const timer = setTimeout(() => setShowSuccessMessage(false), 3000);
       return () => clearTimeout(timer);
     }
-  }, [login]);
+  }, [login, session]);
 
   if (isLoading) return <p>Loading activities…</p>;
   if (error) return <p>Error loading activities.</p>;
