@@ -5,10 +5,10 @@ export const HeaderWrapper = styled.header`
   top: 0;
   left: 0;
   right: 0;
+  width: 100%;
   height: 70px;
 
   display: flex;
-  align-items: center;
   justify-content: center;
 
   background: var(--background-secondary);
@@ -17,9 +17,28 @@ export const HeaderWrapper = styled.header`
   z-index: 1000;
 `;
 
+export const HeaderContent = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+`;
+
 export const HeaderTitle = styled.h1`
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 2%.69;
+  font-weight: 700;
   margin: 0;
   color: var(--primary);
+  text-align: center;
+`;
+
+export const HeaderLogo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
 `;

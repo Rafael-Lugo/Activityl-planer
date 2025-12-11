@@ -1,10 +1,16 @@
 import { useRouter } from "next/router";
-import { HeaderWrapper, HeaderTitle, } from "./styledHeader";
+import {
+  HeaderWrapper,
+  HeaderTitle,
+  HeaderContent,
+  HeaderLogo,
+} from "./styledHeader";
+import LogoIcon from "./../icons/logo.svg";
 
 export default function Header() {
   const router = useRouter();
 
-    const titles = {
+  const titles = {
     "/": "Activity Planner",
     "/favorite": "Favorites",
     "/createactivity": "Create Activity",
@@ -14,7 +20,12 @@ export default function Header() {
 
   return (
     <HeaderWrapper>
-      <HeaderTitle>{title}</HeaderTitle>
+      <HeaderContent>
+        <HeaderLogo>
+          <LogoIcon aria-hidden="true" />
+        </HeaderLogo>
+        <HeaderTitle>{title}</HeaderTitle>
+      </HeaderContent>
     </HeaderWrapper>
   );
 }

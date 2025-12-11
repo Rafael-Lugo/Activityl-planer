@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  *,
-  *::before,
-  *::after {
+*,
+*::before,
+ *::after {
     box-sizing: border-box;
   }
 
@@ -28,20 +28,36 @@ export default createGlobalStyle`
   --alert-foreground: #C74004;
 }
 
-/* .dark {
---radius: 0.65rem;   
-  --background:  #ffffff;
-  --card: none;
-  --card-foreground: #000000;
-  --primary: #000000;
-  --secondary:  '';   
-  --secondary-foreground:  oklch(0.205 0 0);
-  --accent:  #12ad55;   
-  --accent-foreground:  #000000;
+ /* .dark {
+--radius: 0.5rem;   
+   --background:           #181910;  
+    --background-foreground: #E5E5D5;   
+    --background-secondary: #202114;  
+    --background-tertiary:  #3b3d22;
+
+    --card:                 #262716;
+    --card-foreground:      #F7F7EA;
+
+    --input:                #ffffff;
+
+    --bookmark:             #C5C76A;  
+
+    --primary:              #E3E363;  
+    --primary-foreground:   #202114;   
+
+    --secondary:            #A89F7A;
+    --terciary:             #9AA0A4;
+
+    --accent:               #A694FF;   
+    --accent-foreground:    #202114;
+
+    --alert:                #FF8A4A;
+    --alert-foreground:     #3E1200;
 } */
 
 body {
   margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-family: system-ui;
   background: var(--background);
 

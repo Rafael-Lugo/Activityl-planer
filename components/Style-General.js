@@ -23,13 +23,14 @@ export const Content = styled.section`
 
 export const Title = styled.h1`
   background: var(--primary);
-  font-size: 32pt;
+  font-size: 2.69;
+  font-weight: 700;
   color: var(--primary);
   align-self: center;
 `;
 
 export const Subtitle = styled.h2`
-  font-size: 18pt;
+  font-size: 1.5rem;
   text-align: center;
   padding: 7rem 0rem 2rem 0rem;
   margin: 0;
@@ -37,7 +38,7 @@ export const Subtitle = styled.h2`
 `;
 
 export const CardDescription = styled.h3`
-  font-size: 18pt;
+  font-size: 1.5rem;
   color: var(--primary);
   margin: 35px 0 0 0;
 `;
@@ -106,8 +107,8 @@ export const CardTitle = styled.h2`
   left: 1.5rem;
   bottom: 1.5rem;
   margin: 0;
-  font-size: 30pt;
-  font-weight: bold;
+  font-size: 2.69rem;
+  font-weight: 700;
   color: var(--card-foreground);
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 `;
@@ -146,7 +147,7 @@ export const CardMeta = styled.ul`
 `;
 
 export const CardMetaItem = styled.li`
-  font-size: 1rem;
+  font-size: 1.31rem;
   font-weight: 500;
   color: var(--primary);
 `;
@@ -176,7 +177,7 @@ export const IconButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   svg {
     width: 32px;
     height: 32px;
