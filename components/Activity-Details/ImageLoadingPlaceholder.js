@@ -24,7 +24,7 @@ const LoadingContainer = styled.div`
   box-sizing: border-box;
 `;
 
-// Spinner Circle
+
 const Spinner = styled.div`
   width: 32px;
   height: 32px;
@@ -35,13 +35,13 @@ const Spinner = styled.div`
   margin-bottom: 12px;
 `;
 
-// Loading Text
+
 const LoadingText = styled.div`
   font-weight: 500;
   line-height: 1.4;
 `;
 
-// Progress Indicator (optional dots)
+
 const ProgressDots = styled.div`
   margin-top: 8px;
 
@@ -56,7 +56,7 @@ const ProgressDots = styled.div`
   }
 `;
 
-// Main Component
+
 export default function ImageLoadingPlaceholder({
   message = "Updating image...",
 }) {
@@ -69,5 +69,5 @@ export default function ImageLoadingPlaceholder({
   );
 }
 
-// Export individual components if needed
+
 export { LoadingContainer, Spinner, LoadingText };
