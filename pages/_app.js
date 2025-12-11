@@ -18,13 +18,18 @@ export default function App({ Component, pageProps }) {
   }
 
   return (
-    <>
+    <SessionProvider session={session}>
       <GlobalStyle />
       <SWRConfig value={{ fetcher }}>
-        <Header />
-        <Component {...pageProps} toggleLiked={toggleLiked} likedActivityIds={likedActivityIds} />
+        <Header />        
+        <TopRightLogin />
+        <Component
+          {...pageProps}
+          toggleLiked={toggleLiked}
+          likedActivityIds={likedActivityIds}
+        />
         <Navigation />
       </SWRConfig>
-    </>
+    </SessionProvider>
   );
 }

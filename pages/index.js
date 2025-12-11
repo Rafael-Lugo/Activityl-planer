@@ -1,20 +1,59 @@
 import ActivityList from "@/components/Activitylist/ActivityList";
 import { CardList, Subtitle } from "@/components/Style-General";
 import useSWR from "swr";
+import { useEffect, useState } from "react";
+import Searchbar from "@/components/Searchbar/Searchbar";
+import { useSession } from "next-auth/react";
+import { StyledSuccessMessageDiv } from "@/components/Login/StyledMessages";
+import { useRouter } from "next/router";
 
 export default function HomePage({ likedActivityIds, toggleLiked }) {
   const { data: activities, isLoading, error } = useSWR("/api/activities");
+  const [search, setSearch] = useState("");
+
+  // pop up message upon successful login
+  const router = useRouter();
+  const { login } = router.query;
+  const { data: session } = useSession();
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+  useEffect(() => {
+    if (login === "success" && session) {
+      setShowSuccessMessage(true);
+      const timer = setTimeout(() => setShowSuccessMessage(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [login, session]);
 
   if (isLoading) return <p>Loading activities…</p>;
   if (error) return <p>Error loading activities.</p>;
   if (!activities) return <p>No activities found.</p>;
 
+  const filterActivities = activities
+    ? activities.filter((activity) => {
+        const match = search.toLowerCase();
+
+        const title = activity.title?.toLowerCase() || "";
+        const category = activity.category?.toLowerCase() || "";
+        const country = activity.country?.toLowerCase() || "";
+
+        return `${title}|${category}|${country}`.includes(match);
+      })
+    : [];
+
+  
   return (
     <>
+      {showSuccessMessage && (
+        <StyledSuccessMessageDiv>
+          Hello, {session?.user.name}!
+        </StyledSuccessMessageDiv>
+      )}
       <Subtitle>for your next journey</Subtitle>
       <CardList>
+        <Searchbar search={search} setSearch={setSearch} />
         <ActivityList
-          activities={activities}
+          activities={(filterActivities)}
           likedActivityIds={likedActivityIds}
           toggleLiked={toggleLiked}
         />

@@ -37,6 +37,18 @@ export default function Navigation() {
           >
             <BookmarkIcon />
           </NavigationLink>
+          <NavigationLink
+            href="/favorite"
+            $highlighted={router.pathname === "/favorite"}
+          >
+            Favorites
+          </NavigationLink>
+          <NavigationLink
+            href="/mapview"
+            $highlighted={router.pathname === "/mapview"}
+          >
+            Map
+          </NavigationLink>
         </NavigationListItem>
       </NavigationList>
     </NavigationWrapper>

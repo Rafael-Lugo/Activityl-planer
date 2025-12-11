@@ -25,3 +25,5 @@ export default function ActivityList({
     </CardList>
   );
 }
+
+
