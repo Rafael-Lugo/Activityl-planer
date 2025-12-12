@@ -8,7 +8,7 @@ import TopRightLogin from "@/components/Login/TopRightLogin";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: { session, ...pageProps }, }) {
   const [likedActivityIds, setLikedActivityIds] = useState([]);
 
   function toggleLiked(_id) {
