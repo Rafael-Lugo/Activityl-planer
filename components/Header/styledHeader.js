@@ -14,7 +14,7 @@ export const HeaderWrapper = styled.header`
   background: var(--background-secondary);
   color: var(--primary);
   border-bottom: 1px solid var(--primary-foreground);
-  z-index: 1000;
+  z-index: 2000;
 `;
 
 export const HeaderContent = styled.div`

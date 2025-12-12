@@ -1,3 +1,5 @@
+import { CancelButton } from "../Activity-Details/StyledActivityDetails";
+
 export default function Searchbar({ search, setSearch }) {
   function handleSearch(searchString) {
     setSearch(searchString);
@@ -11,9 +13,9 @@ export default function Searchbar({ search, setSearch }) {
           value={search}
           onChange={(event) => handleSearch(event.target.value)}
         />
-        <button type="button" onClick={() => handleSearch("")}>
+        <CancelButton type="button" onClick={() => handleSearch("")}>
           Remove
-        </button>
+        </CancelButton>
       </form>
     </>
   );

@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import  HomeIcon from "../icons/home.svg";
 import  BookmarkIcon from "../icons/bookmark.svg";
 import  AddIcon from "../icons/add.svg";
+import Map from "../icons/map.svg"
 
 export default function Navigation() {
   const router = useRouter();
@@ -37,17 +38,14 @@ export default function Navigation() {
           >
             <BookmarkIcon />
           </NavigationLink>
-          <NavigationLink
-            href="/favorite"
-            $highlighted={router.pathname === "/favorite"}
-          >
-            Favorites
-          </NavigationLink>
+        </NavigationListItem>
+
+        <NavigationListItem>          
           <NavigationLink
             href="/mapview"
             $highlighted={router.pathname === "/mapview"}
           >
-            Map
+            <Map />
           </NavigationLink>
         </NavigationListItem>
       </NavigationList>

@@ -50,8 +50,8 @@ export const NavigationLink = styled(Link)`
   
 
   svg {
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
     overflow: visible;
     display: block;
   }
