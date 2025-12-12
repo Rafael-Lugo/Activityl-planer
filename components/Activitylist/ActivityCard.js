@@ -29,7 +29,7 @@ export default function ActivityCard({
       <Card>
         <Link href={`/activities/${_id}`} legacyBehavior>
           <a>
-            <CardImage src={imageUrl} alt={title} height={300} width={300} />
+            <CardImage src={imageUrl?.url || imageUrl} alt={title} height={300} width={300} />
 
             <CardTitle>{title}</CardTitle>
           </a>

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import useSWR from "swr";
 import countries from "world-countries";
+import ImageUpload from "../UploadImage/ImageUpload";
 
 import {
   Container,
@@ -18,6 +19,8 @@ export default function ActivityForm() {
   const { data: categories } = useSWR("/api/categories");
   const [submitError, setSubmitError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [formKey, setFormKey] = useState(0);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -28,6 +31,35 @@ export default function ActivityForm() {
 
     const formData = new FormData(event.target);
     const activityData = Object.fromEntries(formData);
+
+    let imageUrl = null;
+
+    if (selectedFile) {
+      const uploadForm = new FormData();
+      uploadForm.append("cover", selectedFile);
+
+      const uploadResponse = await fetch("/api/upload", {
+        method: "POST",
+        body: uploadForm,
+      });
+
+      if (!uploadResponse.ok) {
+        setSubmitError("Image upload failed");
+        return;
+      }
+
+      const uploadResult = await uploadResponse.json();
+
+      imageUrl = {
+        url: uploadResult.secure_url || uploadResult.url,
+        width: uploadResult.width.toString(),
+        height: uploadResult.height.toString(),
+        public_id: uploadResult.public_id,
+      };
+    }
+
+    activityData.imageUrl = imageUrl;
+
     const response = await fetch("/api/activities", {
       method: "POST",
       headers: {
@@ -40,11 +72,12 @@ export default function ActivityForm() {
       setSubmitError("Failed to create activity.");
       return;
     }
-
     //activity to go on top and successmessage
     setSuccessMessage("Activity has been created!");
     mutate();
     event.target.reset();
+    setSelectedFile(null);
+    setFormKey((prev) => prev + 1);
   }
 
   // world countries library
@@ -58,7 +91,11 @@ export default function ActivityForm() {
           Title
           <StyledInput type="text" id="title" name="title" required />
         </StyledLabel>
-
+   <StyledLabel htmlFor="picture">Picture
+        <ImageUpload
+          key={formKey}
+          onFileSelect={(file) => setSelectedFile(file)}
+        /></StyledLabel>
         <StyledLabel htmlFor="description">
           Description
           <StyledTextarea
