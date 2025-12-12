@@ -6,9 +6,14 @@ export const NavigationWrapper = styled.nav`
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #676c70ff;
+  background-color: var(--background-tertiary);
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-  padding: 0;
+  padding: 1rem 2rem;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
 `;
 
 export const NavigationList = styled.ul`
@@ -23,23 +28,52 @@ export const NavigationList = styled.ul`
 
 export const NavigationListItem = styled.li`
   margin: 0;
-  border: 2px solid;
 `;
 
 export const NavigationLink = styled(Link)`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  border-radius: 999px;
+ 
+  justify-content: center;
   text-decoration: none;
-  color: #ecf0f1;
+  color: ${({ $highlighted }) =>
+    $highlighted ? "var(--accent-foreground)" : "var(--background-secondary)"};
   font-size: 0.9rem;
   font-weight: 500;
-  padding: 0.5rem 3rem;
-  transition: all 0.3s ease;
-  background-color: ${(props) => (props.$highlighted ? "#a9a9a9" : "#000")};
+  padding: 0.5rem;
+  transition:
+    transform 0.15s ease,
+    filter 0.2s ease,
+    color 0.2s ease,
+    stroke 0.2s ease,
+    fill 0.2s ease;
+  
+
+  svg {
+    width: 32px;
+    height: 32px;
+    overflow: visible;
+    display: block;
+  }
+
+  svg path, svg circle , svg line {
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+   
+    fill: none;
+    transition: stroke 0.2s ease, fill 0.2s ease;
+  }
 
   &:hover {
-    background-color: white;
-    color: black;
+    transform: translateY(-1px);
+    filter: brightness(1.15);
+    color: var(--accent);    
   }
+
+    &:hover svg path {
+    stroke: var(--accent);
+    fill: none;
+    }
 `;

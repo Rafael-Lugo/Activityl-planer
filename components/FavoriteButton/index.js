@@ -1,14 +1,17 @@
-import { Bookmark } from "lucide-react";
-import Image from "next/image";
+import BookmarkIcon from "../icons/bookmark.svg";
+import { IconButton } from "../Style-General";
 
 export default function FavoriteButton({ _id, toggleLiked, isLiked }) {
   return (
-    <button
+    <IconButton
       type="button"
       onClick={() => toggleLiked(_id)} //arrow function on _id
       aria-label={isLiked ? "unlike" : "like"}
+      $isLiked={isLiked}
     >
-      <Bookmark fill={isLiked ? "red" : "none"} />
-    </button>
+      <BookmarkIcon
+        width={28}
+        height={28} />
+    </IconButton>
   );
 }

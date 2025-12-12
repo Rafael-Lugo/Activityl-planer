@@ -6,6 +6,29 @@ import DeleteButton from "./DeleteButton/DeleteButton";
 import ImageUpload from "../UploadImage/ImageUpload";
 import ImageLoadingPlaceholder from "./ImageLoadingPlaceholder";
 
+import {
+  DetailsPageWrapper,
+  DetailsPageHeader,
+  DetailsTitle,
+  DetailsImage,
+  DetailsSection,
+  DetailsLabel,
+  DetailsText,
+  InlineForm,
+  InlineInput,
+  InlineSelect,
+  InlineSaveButton,
+  EditContainer,
+  EditToggleButton,
+  FieldWrapper,
+  EditPanel,
+  EditPanelLabel,
+  CancelButton,
+  InlineTextarea,
+} from "./StyledActivityDetails";
+
+import { Form } from "lucide-react";
+
 export default function ActivityDetails({ activity, onDelete }) {
   const { data: categories } = useSWR("/api/categories");
   const { mutate } = useSWR(`/api/activities/${activity._id}`);
@@ -77,28 +100,32 @@ export default function ActivityDetails({ activity, onDelete }) {
       console.error("Edit failed:", error);
       setIsEditingImage(false);
       setUploadProgress(null);
+      setToggleEdit(false)
     }
   }
 
   return (
     <>
-      <header>
-        <EditableItem
-          form={
-            <form onSubmit={handleEdit}>
-              <label>
-                <strong>Title: </strong>
-                <input name="title" defaultValue={activity.title} />
-              </label>
-              <button type="submit">Save</button>
-            </form>
-          }
-          display={<h1>{activity.title}</h1>}
-        />
-      </header>
-      <main>
-        <BackButton />
-        <EditableItem
+      <DetailsPageWrapper>
+        <DetailsPageHeader>
+          <BackButton />
+
+          <EditableItem
+            label="Title"
+            form={
+              <InlineForm onSubmit={handleEdit}>
+                <InlineInput
+                  name="title"
+                  defaultValue={activity.title}
+                  required
+                />
+                <InlineSaveButton type="submit">Save</InlineSaveButton>
+              </InlineForm>
+            }
+            display={<DetailsTitle>{activity.title}</DetailsTitle>}
+          />
+        </DetailsPageHeader>
+ <EditableItem
           form={
             <form onSubmit={handleEdit}>
               <label>
@@ -119,80 +146,78 @@ export default function ActivityDetails({ activity, onDelete }) {
               />
             )
           }
-        />
+         />
+     
+
         <EditableItem
+          label="Description"
           form={
-            <form onSubmit={handleEdit}>
-              <label>
-                <strong>Description: </strong>
-                <input name="description" defaultValue={activity.description} />
-              </label>
-              <button type="submit">Save</button>
-            </form>
+            <InlineForm onSubmit={handleEdit}>
+              <EditPanelLabel>Description:</EditPanelLabel>
+              <InlineTextarea
+                name="description"
+                defaultValue={activity.description}
+                rows={5}
+              />
+
+              <InlineSaveButton type="submit">Save</InlineSaveButton>
+            </InlineForm>
           }
           display={
-            <p>
-              <strong>Description: </strong> {activity.description}
-            </p>
+            <DetailsSection>
+              <DetailsLabel>Description: </DetailsLabel>
+              <DetailsText>{activity.description}</DetailsText>
+            </DetailsSection>
           }
         />
 
         <EditableItem
+          label="area"
           form={
-            <form onSubmit={handleEdit}>
-              <label>
-                <strong>Area:</strong>
-                <input name="area" defaultValue={activity.area} />
-              </label>
-              <button type="submit">Save</button>
-            </form>
+            <InlineForm onSubmit={handleEdit}>
+              <EditPanelLabel>Area:</EditPanelLabel>
+              <InlineTextarea name="area" defaultValue={activity.area} />
+
+              <InlineSaveButton type="submit">Save</InlineSaveButton>
+            </InlineForm>
           }
           display={
-            <p>
-              <strong>Area: </strong>
-              {activity.area}
-            </p>
+            <DetailsSection>
+              <DetailsLabel>Area: </DetailsLabel>
+              <DetailsText>{activity.area}</DetailsText>
+            </DetailsSection>
           }
         />
 
         <EditableItem
+          label="Country"
           form={
-            <form onSubmit={handleEdit}>
-              <strong>Country: </strong>
-              <select name="country" defaultValue={activity.country}>
+            <InlineForm onSubmit={handleEdit}>
+              <EditPanelLabel>Country:</EditPanelLabel>
+              <InlineSelect name="country" defaultValue={activity.country}>
                 {countryList.map((country) => (
                   <option key={country} value={country}>
                     {country}
                   </option>
                 ))}
-              </select>
-              <button type="submit">Save</button>
-            </form>
+              </InlineSelect>
+              <InlineSaveButton type="submit">Save</InlineSaveButton>
+            </InlineForm>
           }
           display={
-            <p>
-              <strong>Country:</strong> {activity.country}
-            </p>
+            <DetailsSection>
+              <DetailsLabel>Country:</DetailsLabel>
+              <DetailsText>{activity.country}</DetailsText>
+            </DetailsSection>
           }
         />
 
         <EditableItem
-          display={
-            <section>
-              <strong>Category:</strong>
-              {activity.categories?.length > 0 ? (
-                activity.categories.map((category) => (
-                  <span key={category._id}> {category.name}</span>
-                ))
-              ) : (
-                <span> No category selected</span>
-              )}
-            </section>
-          }
+          label="Category"
           form={
-            <form onSubmit={handleEdit}>
-              <strong>Category: </strong>
-              <select
+            <InlineForm onSubmit={handleEdit}>
+              <EditPanelLabel>Category:</EditPanelLabel>
+              <InlineSelect
                 name="categories"
                 defaultValue={activity.categories?.[0]?._id || ""}
               >
@@ -201,36 +226,51 @@ export default function ActivityDetails({ activity, onDelete }) {
                     {category.name}
                   </option>
                 ))}
-              </select>
-              <button type="submit">Save</button>
-            </form>
+              </InlineSelect>
+              <InlineSaveButton type="submit">Save</InlineSaveButton>
+            </InlineForm>
+          }
+          display={
+            <DetailsSection>
+              <DetailsLabel>Category:</DetailsLabel>
+              {activity.categories?.length > 0 ? (
+                activity.categories.map((category) => (
+                  <DetailsText key={category._id}> {category.name}</DetailsText>
+                ))
+              ) : (
+                <DetailsText> No category selected</DetailsText>
+              )}
+            </DetailsSection>
           }
         />
         <DeleteButton id={activity._id} onDelete={onDelete} />
-      </main>
+      </DetailsPageWrapper>
     </>
   );
 }
 
 function EditableItem({ form, display }) {
   const [toggleEdit, setToggleEdit] = useState(false);
-  return (
-    <div>
-      {toggleEdit ? (
-        <div
-          onSubmit={() => {
-            setToggleEdit(false);
-          }}
-        >
-          {form}
-        </div>
-      ) : (
-        display
-      )}
 
-      <button onClick={() => setToggleEdit(!toggleEdit)}>
-        {toggleEdit ? "Cancel" : "Edit"}
-      </button>
-    </div>
+  if (toggleEdit) {
+    return (
+      <FieldWrapper>
+        <EditPanel>{form}</EditPanel>
+
+        <CancelButton type="button" onClick={() => setToggleEdit(false)}>
+          Cancel
+        </CancelButton>
+      </FieldWrapper>
+    );
+  }
+
+  return (
+    <EditContainer>
+      {display}
+
+      <EditToggleButton type="button" onClick={() => setToggleEdit(true)}>
+        Edit
+      </EditToggleButton>
+    </EditContainer>
   );
 }

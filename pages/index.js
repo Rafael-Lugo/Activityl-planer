@@ -1,10 +1,11 @@
 import ActivityList from "@/components/Activitylist/ActivityList";
+import { CardList, Subtitle } from "@/components/Style-General";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import Searchbar from "@/components/Searchbar/Searchbar";
 import { useSession } from "next-auth/react";
 import { StyledSuccessMessageDiv } from "@/components/Login/StyledMessages";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 export default function HomePage({ likedActivityIds, toggleLiked }) {
   const { data: activities, isLoading, error } = useSWR("/api/activities");
@@ -17,12 +18,12 @@ export default function HomePage({ likedActivityIds, toggleLiked }) {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
-    if (login === "success") {
+    if (login === "success" && session) {
       setShowSuccessMessage(true);
       const timer = setTimeout(() => setShowSuccessMessage(false), 3000);
       return () => clearTimeout(timer);
     }
-  }, [login]);
+  }, [login, session]);
 
   if (isLoading) return <p>Loading activities…</p>;
   if (error) return <p>Error loading activities.</p>;
@@ -40,6 +41,7 @@ export default function HomePage({ likedActivityIds, toggleLiked }) {
       })
     : [];
 
+  
   return (
     <>
       {showSuccessMessage && (
@@ -47,14 +49,15 @@ export default function HomePage({ likedActivityIds, toggleLiked }) {
           Hello, {session?.user.name}!
         </StyledSuccessMessageDiv>
       )}
-      <h1>Activity Planner</h1>
-      <h2>for your next journey</h2>
-      <Searchbar search={search} setSearch={setSearch} />
-      <ActivityList
-        activities={filterActivities}
-        likedActivityIds={likedActivityIds}
-        toggleLiked={toggleLiked}
-      />
+      <Subtitle>for your next journey</Subtitle>
+      <CardList>
+        <Searchbar search={search} setSearch={setSearch} />
+        <ActivityList
+          activities={(filterActivities)}
+          likedActivityIds={likedActivityIds}
+          toggleLiked={toggleLiked}
+        />
+      </CardList>
     </>
   );
 }
