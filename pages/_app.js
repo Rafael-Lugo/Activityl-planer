@@ -3,6 +3,8 @@ import GlobalStyle from "./styles";
 import { useState } from "react";
 import Navigation from "@/components/Navigation/Navigation";
 import Header from "@/components/Header/index";
+import { SessionProvider } from "next-auth/react";
+import TopRightLogin from "@/components/Login/TopRightLogin";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
