@@ -20,19 +20,21 @@ export default function DetailsPage() {
       </div>
     );
   }
- async function handleDelete() {
+  async function handleDelete() {
     const response = await fetch(`/api/activities/${id}`, {
       method: "DELETE",
     });
 
-       if (response.ok) {
-        router.push("/");
-       } else {return alert("Please try again")}
-      }
+    if (response.ok) {
+      router.push("/");
+    } else {
+      return alert("Please try again");
+    }
+  }
 
   return (
     <>
-  <ActivityDetails activity={activity} onDelete={handleDelete}/>
+      <ActivityDetails activity={activity} onDelete={handleDelete} />
     </>
   );
 }

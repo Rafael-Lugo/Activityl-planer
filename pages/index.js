@@ -1,4 +1,5 @@
 import ActivityList from "@/components/Activitylist/ActivityList";
+import { CardList, Subtitle } from "@/components/Style-General";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import Searchbar from "@/components/Searchbar/Searchbar";
@@ -40,10 +41,7 @@ export default function HomePage({ likedActivityIds, toggleLiked }) {
       })
     : [];
 
-  console.log("Activities:", activities);
-  console.log("FilterActivities:", filterActivities);
-  console.log("Search:", search);
-
+  
   return (
     <>
       {showSuccessMessage && (
@@ -51,14 +49,15 @@ export default function HomePage({ likedActivityIds, toggleLiked }) {
           Hello, {session?.user.name}!
         </StyledSuccessMessageDiv>
       )}
-      <h1>Activity Planner</h1>
-      <h2>for your next journey</h2>
-      <Searchbar search={search} setSearch={setSearch} />
-      <ActivityList
-        activities={(activities, filterActivities)}
-        likedActivityIds={likedActivityIds}
-        toggleLiked={toggleLiked}
-      />
+      <Subtitle>for your next journey</Subtitle>
+      <CardList>
+        <Searchbar search={search} setSearch={setSearch} />
+        <ActivityList
+          activities={(filterActivities)}
+          likedActivityIds={likedActivityIds}
+          toggleLiked={toggleLiked}
+        />
+      </CardList>
     </>
   );
 }

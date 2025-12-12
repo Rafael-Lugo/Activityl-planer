@@ -6,6 +6,11 @@ import {
 } from "./StyledNavigation";
 import { useRouter } from "next/router";
 
+import  HomeIcon from "../icons/home.svg";
+import  BookmarkIcon from "../icons/bookmark.svg";
+import  AddIcon from "../icons/add.svg";
+import Map from "../icons/map.svg"
+
 export default function Navigation() {
   const router = useRouter();
   return (
@@ -16,24 +21,31 @@ export default function Navigation() {
             href="/createactivity"
             $highlighted={router.pathname === "/createactivity"}
           >
-            Add
+            <AddIcon />
           </NavigationLink>
         </NavigationListItem>
+
         <NavigationListItem>
           <NavigationLink href="/" $highlighted={router.pathname === "/"}>
-            Home
+            <HomeIcon />
           </NavigationLink>
+        </NavigationListItem>
+
+        <NavigationListItem>
           <NavigationLink
             href="/favorite"
             $highlighted={router.pathname === "/favorite"}
           >
-            Favorites
+            <BookmarkIcon />
           </NavigationLink>
+        </NavigationListItem>
+
+        <NavigationListItem>          
           <NavigationLink
             href="/mapview"
             $highlighted={router.pathname === "/mapview"}
           >
-            Map
+            <Map />
           </NavigationLink>
         </NavigationListItem>
       </NavigationList>

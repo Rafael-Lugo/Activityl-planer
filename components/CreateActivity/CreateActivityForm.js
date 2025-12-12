@@ -2,6 +2,16 @@ import { useState } from "react";
 import useSWR from "swr";
 import countries from "world-countries";
 
+import {
+  Container,
+  Subtitle,
+  StyledForm,
+  StyledLabel,
+  StyledInput,
+  StyledSelect,
+  StyledFormButton,
+  StyledTextarea,
+} from "../Style-General";
 
 export default function ActivityForm() {
   const { mutate } = useSWR("/api/activities");
@@ -41,46 +51,57 @@ export default function ActivityForm() {
   const countryList = countries.map((country) => country.name.common);
 
   return (
-    <>
-      <h1>Create your Activity</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">
-          Title:*
-          <input type="text" id="title" name="title" required />
-        </label>
-        <label htmlFor="description">
-          Description:
-          <input type="text" id="description" name="description" />
-        </label>
-        <label htmlFor="category">
-          Please select a category*
-          <select id="category" name="category" required>
+    <Container>
+      <Subtitle>Create your Activity</Subtitle>
+      <StyledForm onSubmit={handleSubmit}>
+        <StyledLabel htmlFor="title">
+          Title
+          <StyledInput type="text" id="title" name="title" required />
+        </StyledLabel>
+
+        <StyledLabel htmlFor="description">
+          Description
+          <StyledTextarea
+            type="text"
+            id="description"
+            name="description"
+            rows={4}
+            placeholder="Describe your activity"
+          />
+        </StyledLabel>
+
+        <StyledLabel htmlFor="category">
+          Please select a category
+          <StyledSelect id="category" name="category" required>
             <option value="Select Category">Please select a category</option>
             {categories?.map((category) => (
               <option key={category._id} value={category.name}>
                 {category.name}
               </option>
             ))}
-          </select>
-        </label>
-        <label htmlFor="area">
-          Area:
-          <input type="text" id="area" name="area" />
-        </label>
-        <label htmlFor="country">
-          Country:
-          <select id="country" name="country">
+          </StyledSelect>
+        </StyledLabel>
+
+        <StyledLabel htmlFor="area">
+          Area
+          <StyledInput type="text" id="area" name="area" />
+        </StyledLabel>
+
+        <StyledLabel htmlFor="country">
+          Country
+          <StyledSelect id="country" name="country">
             {countryList.map((country) => (
               <option key={country} value={country}>
                 {country}
               </option>
             ))}
-          </select>
-        </label>
-        <button type="submit">Submit</button>
+          </StyledSelect>
+        </StyledLabel>
+
+        <StyledFormButton type="submit">Submit</StyledFormButton>
         {submitError && <p>{submitError}</p>}
         {successMessage && <p>{successMessage}</p>}
-      </form>
-    </>
+      </StyledForm>
+    </Container>
   );
 }

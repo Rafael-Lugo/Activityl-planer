@@ -1,16 +1,18 @@
 import ActivityCard from "./ActivityCard";
+import { CardList, ActivityItem } from "../Style-General";
 
-
-
-export default function ActivityList({ activities, likedActivityIds, toggleLiked, }) {
-
-
+export default function ActivityList({
+  activities,
+  likedActivityIds,
+  toggleLiked,
+}) {
   return (
-    <ul>
+    <CardList>
       {activities.map((activity) => (
-        <li key={activity._id}>
+        <ActivityItem key={activity._id}>
           <ActivityCard
             _id={activity._id}
+            imageUrl={activity.imageUrl}
             title={activity.title}
             description={activity.description}
             area={activity.area}
@@ -18,9 +20,9 @@ export default function ActivityList({ activities, likedActivityIds, toggleLiked
             likedActivityIds={likedActivityIds}
             toggleLiked={toggleLiked}
           />
-        </li>
+        </ActivityItem>
       ))}
-    </ul>
+    </CardList>
   );
 }
 

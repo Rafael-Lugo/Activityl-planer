@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
+import { Title } from "../Style-General";
 
 //Marker Icon
 const DefaultIcon = L.icon({
@@ -42,7 +43,7 @@ export default function MapViewInner() {
 
   return (
     <>
-      <h1>Map View</h1>
+      <Title>Map View</Title>
       <MapContainer
         center={[0, 0]}
         zoom={1}
@@ -51,6 +52,7 @@ export default function MapViewInner() {
           width: "65%",
           borderRadius: "12px",
           marginTop: "30px",
+          
         }}
       >
         <TileLayer

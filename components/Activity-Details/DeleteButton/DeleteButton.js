@@ -1,4 +1,11 @@
 import { useState } from "react";
+import {
+  DeleteButtonWrapper,
+  DeletePrimaryButton,
+  ConfirmBox,
+  ConfirmActions,
+  ConfirmButton,
+} from "./StyledDeleteButton";
 
  export default function DeleteButton({ onDelete, id }) {
    const [deleteButton, setDeleteButton] = useState(false);
@@ -17,26 +24,30 @@ import { useState } from "react";
 
   if (!deleteButton) {
     return (
-      <button onClick={handleFirstClick}>
-        Delete
-      </button>
+      <DeleteButtonWrapper>
+        <DeletePrimaryButton  type="button" onClick={handleFirstClick}>
+          Delete activity
+        </DeletePrimaryButton>
+      </DeleteButtonWrapper>
     );
   }
 
  
   return (
     <>
-    <div className="">
+    <DeleteButtonWrapper>
+    <ConfirmBox>
         <p>Really Delete?</p>
-    <div className="">
-      <button onClick={handleCancel}>
+    <ConfirmActions>
+      <ConfirmButton type="button" $variante="Cancel" onClick={handleCancel}>
         Cancel
-      </button>
-      <button onClick={handleConfirmDelete}>
+      </ConfirmButton>
+      <ConfirmButton type="button" onClick={handleConfirmDelete}>
         Delete
-      </button>
-      </div>
-      </div>
+      </ConfirmButton>
+      </ConfirmActions>
+      </ConfirmBox>
+      </DeleteButtonWrapper>
     </>
   );
 }
