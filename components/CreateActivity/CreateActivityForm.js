@@ -91,11 +91,11 @@ export default function ActivityForm() {
           Title
           <StyledInput type="text" id="title" name="title" required />
         </StyledLabel>
-  <label placeholder="Enter picture">Bild</label>
+   <StyledLabel htmlFor="picture">Picture
         <ImageUpload
           key={formKey}
           onFileSelect={(file) => setSelectedFile(file)}
-        />
+        /></StyledLabel>
         <StyledLabel htmlFor="description">
           Description
           <StyledTextarea
