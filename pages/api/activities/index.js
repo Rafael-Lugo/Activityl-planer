@@ -6,16 +6,35 @@ async function geocode(query) {
     query
   )}&format=json&limit=1`;
 
-  const response = await fetch(url);
-  const data = await response.json();
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "User-Agent": "Activityl-planer/1.0 (https://activityl-planer.vercel.app/)",
+        Accept: "application/json",
+      },
+    });
 
-  if (!data || data.length === 0) {
+    if (!response.ok) {
+      return { latitude: null, longitude: null };
+    }
+
+    const contentType = response.headers.get("content-type");
+    if (!contentType?.includes("application/json")) {
+      return { latitude: null, longitude: null };
+    }
+    const data = await response.json();
+
+    if (!Array.isArray(data) || data.length === 0) {
+      return { latitude: null, longitude: null };
+    }
+
+    return {
+      latitude: parseFloat(data[0].lat),
+      longitude: parseFloat(data[0].lon),
+    };
+  } catch {
     return { latitude: null, longitude: null };
   }
-  return {
-    latitude: parseFloat(data[0].lat),
-    longitude: parseFloat(data[0].lon),
-  };
 }
 
 export default async function handler(request, response) {
@@ -27,20 +46,24 @@ export default async function handler(request, response) {
     return;
   }
   if (request.method === "POST") {
-    const activityData = request.body;
-    console.log("📌 POST BODY:", activityData);
-    const coords = await geocode(
-      `${activityData.area}, ${activityData.country}`
-    );
-    console.log("📌 GEOCODING RETURN:", coords);
+    try {
+      const activityData = request.body;
+      console.log("📌 POST BODY:", activityData);
+      const coords = await geocode(
+        `${activityData.area}, ${activityData.country}`
+      );
+      console.log("📌 GEOCODING RETURN:", coords);
 
-    activityData.latitude = coords.latitude;
-    activityData.longitude = coords.longitude;
+      activityData.latitude = coords.latitude;
+      activityData.longitude = coords.longitude;
 
-    const created = await Activity.create(activityData);
-    console.log("📌 DB GESPEICHERT:", created);
+      const created = await Activity.create(activityData);
+      console.log("📌 DB GESPEICHERT:", created);
 
-    response.status(201).json({ status: "Activity created." });
+      response.status(201).json({ status: "Activity created." });
+    } catch (error) {
+      response.status(500).json({ error: "Failed to create activity" });
+    }
     return;
   }
   if (request.method === "PUT") {
